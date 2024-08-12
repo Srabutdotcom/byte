@@ -1,0 +1,17 @@
+{
+  "name": "@aicone/byte",
+  "version": "0.1.0",
+  "exports": "./dist/bytes.js",
+  "publish":{
+
+  },
+  "lint":{
+    "include": ["dist/"],
+    "rules": {
+      "exclude": ["no-var", "no-explicit-any"]
+    }
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@^1.0.2"
+  }
+}
