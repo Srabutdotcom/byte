@@ -5,3 +5,4 @@ export { getUint8BE, getUint8, getUint16, getUint24, getUint32 } from './get.js'
 
 //`esbuild ./mod.js --bundle --format=esm --target=esnext --outfile=../dist/bytes.js --legal-comments=inline`
 //--external:npm:jose* --external:npm:@lapo/*
+// npx -p typescript tsc bytes.js --declaration --allowJs --emitDeclarationOnly --lib ESNext
