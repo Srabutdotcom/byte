@@ -1,3 +1,4 @@
+/// <reference types="./bytes.d.ts" />
 // concat.js
 /** ! @preserve
  * Concate two or more Uint8Array to one Uint8Array
