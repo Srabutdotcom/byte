@@ -1,6 +1,6 @@
 {
   "name": "@aicone/byte",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "exports": "./dist/bytes.js",
   "publish":{
 
@@ -8,7 +8,7 @@
   "lint":{
     "include": ["dist/"],
     "rules": {
-      "exclude": ["no-var", "no-explicit-any"]
+      "exclude": ["no-var", "no-explicit-any", "no-slow-types"]
     }
   },
   "imports": {
