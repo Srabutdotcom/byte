@@ -17,5 +17,8 @@ const concatenated = concat(new Uint8Array([0,2]),new Uint8Array([5,6])) // -> n
 
 Contributions to improve the library are welcome. Please open an issue or pull request on the GitHub repository.
 
+### Donation
+- https://paypal.me/aiconeid 
+
 ### License
 MIT
