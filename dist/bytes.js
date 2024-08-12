@@ -1,6 +1,6 @@
-/// <reference types="./bytes.d.ts" />
+// @ts-self-types="./bytes.d.ts"
 // concat.js
-/** ! @preserve
+/** !@preserve
  * Concate two or more Uint8Array to one Uint8Array
  * @param  {...Uint8Array} bs [Uint8Array]
  * @returns {Uint8Array} Uint8Array
@@ -17,7 +17,7 @@ function concat(...bs) {
 }
 
 // integer.js
-/**! @preserve
+/**!@preserve
  * return integer from string or number.
  * 
  * if string contain a floating number then it will be converted to integer
@@ -33,15 +33,15 @@ function ensureInteger(integer) {
     throw TypeError(`expected integer but got ${integer}`);
   return integer;
 }
-/**! @preserve
+/**!@preserve
  *@typedef {number} integer 
  *integer positive or negative
  */
-/**! @preserve
+/**!@preserve
  *@typedef {number} uint 
  *positive integer
  */
-/**! @preserve
+/**!@preserve
  * return positive integer or throw TypeError
  * @param {number|string} integer
  * @returns {uint} positive integer 
@@ -54,7 +54,7 @@ function ensureUint(integer) {
 }
 
 // set.js
-/**! @preserve
+/**!@preserve
  * convert an integer value to Uint8Array
  * @param {number|string} integer 
  * @param {number|string} bytes 
@@ -74,7 +74,7 @@ function Uint8BE(integer, bytes) {
   }
   return uint8;
 }
-/**! @preserve
+/**!@preserve
  * convert an integer value below 65536 (16 bits or 2 bytes) to Uint8Array
  * @param {number|string} int 
  * @returns 
@@ -82,7 +82,7 @@ function Uint8BE(integer, bytes) {
 function Uint16BE(int) {
   return Uint8BE(int, 2);
 }
-/**! @preserve
+/**!@preserve
  * convert an integer value below 16777216 (24 bits or 3 bytes) to Uint8Array
  * @param {number|string} int 
  * @returns 
@@ -90,7 +90,7 @@ function Uint16BE(int) {
 function Uint24BE(int) {
   return Uint8BE(int, 3);
 }
-/**! @preserve
+/**!@preserve
  * convert an integer value below 4294967296 (32 bits or 4 bytes) to Uint8Array
  * @param {number|string} int 
  * @returns 
@@ -98,7 +98,7 @@ function Uint24BE(int) {
 function Uint32BE(int) {
   return Uint8BE(int, 4);
 }
-/**! @preserve
+/**!@preserve
  * return the maximum byte number to store the integer
  * ```
  * maxBytes(255) = 1
@@ -118,10 +118,10 @@ function maxBytes(integer) {
 }
 
 // get.js
-/** ! @preserve
+/** !@preserve
  * @typedef {number} uint positive integer
 */
-/** ! @preserve
+/** !@preserve
  * @param {Uint8Array} data 
  * @param {uint} pos 
  * @param {uint} length 
@@ -147,7 +147,7 @@ function getUint8BE(data, pos = 0, length = 1) {
   }
   return output;
 }
-/**! @preserve
+/**!@preserve
  * get positive integer from 8 bytes array
  * @param {Uint8Array} data 
  * @param {uint} pos 
@@ -156,7 +156,7 @@ function getUint8BE(data, pos = 0, length = 1) {
 function getUint8(data, pos) {
   return getUint8BE(data, pos, 1);
 }
-/**! @preserve
+/**!@preserve
  * get positive integer from 16 bytes array
  * @param {Uint8Array} data 
  * @param {uint} pos 
@@ -165,7 +165,7 @@ function getUint8(data, pos) {
 function getUint16(data, pos) {
   return getUint8BE(data, pos, 2);
 }
-/**! @preserve
+/**!@preserve
  * get positive integer from 24 bytes array
  * @param {Uint8Array} data 
  * @param {uint} pos 
@@ -174,7 +174,7 @@ function getUint16(data, pos) {
 function getUint24(data, pos) {
   return getUint8BE(data, pos, 3);
 }
-/** ! @preserve
+/** !@preserve
  * get positive integer from 32 bytes array
  * @param {Uint8Array} data 
  * @param {uint} pos 
