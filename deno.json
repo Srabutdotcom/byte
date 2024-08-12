@@ -1,6 +1,6 @@
 {
   "name": "@aicone/byte",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "exports": "./dist/bytes.js",
   "publish":{
 
