@@ -39,4 +39,4 @@ jobs:
         run: deno lint dist/ --rules-exclude=no-var, no-explicit-any
 
       - name: Run tests
-        run: deno test test/concatTest.js test/uint8Test.js test/maxBytesTest.js test/ensureUintTest.js test/ensureInteger.js
+        run: deno test test/concatTest.js test/uint8Test.js test/maxBytesTest.js test/ensureUintTest.js test/ensureIntegerTest.js
