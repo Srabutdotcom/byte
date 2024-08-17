@@ -1,4 +1,5 @@
 // @ts-self-types="./bytes.d.ts"
+// deno-lint-ignore-file no-explicit-any no-var
 // concat.js
 /** 
  * Concate two or more Uint8Array to one Uint8Array
@@ -25,44 +26,39 @@ function concat(...bs) {
  * 
  * throw TypeError if string can't be converted to integer 
  * 
- * @param {number|string} integer 
+ * @param {number|string} int 
  * @returns {integer} integer
  */
-function ensureInteger(integer2) {
-  integer2 = +Number(integer2).toFixed(0);
-  const pass = Number.isInteger(integer2);
+function ensureInteger(int) {
+  int = +Number(int).toFixed(0);
+  const pass = Number.isInteger(int);
   if (!pass)
-    throw TypeError(`expected integer but got ${integer2}`);
-  return integer2;
+    throw TypeError(`expected integer but got ${integer}`);
+  return int;
 }
-/**
- * 
- *@typedef {number} integer 
- *integer positive or negative
- */
 /**
  *@typedef {number} uint 
  *positive integer
  */
 /**
  * return positive integer or throw TypeError
- * @param {number|string} integer
+ * @param {number|string} int
  * @returns {uint} positive integer 
  */
-function ensureUint(integer2) {
-  integer2 = ensureInteger(integer2);
-  if (integer2 < 0)
-    throw TypeError(`expected positive integer but got ${integer2}`);
-  return integer2;
+function ensureUint(int) {
+  int = ensureInteger(int);
+  if (int < 0)
+    throw TypeError(`expected positive integer but got ${int}`);
+  return int;
 }
 /**
  * 
  * return positive integer or throw TypeError
- * @param {number|string} integer 
+ * @param {number|string} int 
  * @returns {uint} positive integer 
  */
-function uint(integer2) {
-  return ensureUint(integer2);
+function uint(int) {
+  return ensureUint(int);
 }
 /**
  * 
@@ -72,31 +68,31 @@ function uint(integer2) {
  * 
  * throw TypeError if string can't be converted to integer 
  * 
- * @param {number|string} integer 
+ * @param {number|string} int 
  * @returns {integer} integer
  */
-function integer(integer2) {
-  return ensureInteger(integer2);
+function integer(int) {
+  return ensureInteger(int);
 }
 
 // set.js
 /**
  * convert an integer value to Uint8Array
- * @param {number|string} integer 
+ * @param {number|string} int 
  * @param {number|string} bytes 
  * @returns 
  */
-function Uint8BE(integer2, bytes) {
-  integer2 = ensureUint(integer2);
-  bytes = bytes ? ensureUint(bytes) : maxBytes(integer2);
+function Uint8BE(int, bytes) {
+  int = ensureUint(int);
+  bytes = bytes ? ensureUint(bytes) : maxBytes(int);
   const upper = 2 ** (8 * bytes) - 1;
-  if (integer2 > upper)
+  if (int > upper)
     return TypeError(`integer can't be more than ${upper} `);
   const uint8 = new Uint8Array(bytes);
   for (let i = 0; i < bytes; i++) {
     const index = bytes - 1 - i;
     const shiftAmount = index * 8;
-    uint8[i] = integer2 >> shiftAmount & 255;
+    uint8[i] = int >> shiftAmount & 255;
   }
   return uint8;
 }
@@ -130,14 +126,14 @@ function Uint32BE(int) {
  * maxBytes(255) = 1
  * maxBytes(256) = 2
  * ```
- * @param {number|string} integer - either number or string containing number
+ * @param {number|string} int - either number or string containing number
  * @returns 
  */
-function maxBytes(integer2) {
-  integer2 = ensureInteger(integer2);
+function maxBytes(int) {
+  int = ensureInteger(int);
   let b = 1;
   while (true) {
-    if (2 ** (b * 8) > integer2)
+    if (2 ** (b * 8) > int)
       return b;
     b++;
   }

@@ -2,15 +2,15 @@ import { ensureInteger, ensureUint } from "./integer.js";
 
 /**! @preserve
  * convert an integer value to Uint8Array
- * @param {number|string} integer 
+ * @param {number|string} int 
  * @param {number|string} bytes 
  * @returns 
  */
-export function Uint8BE(integer, bytes) {
-   integer = ensureUint(integer);
-   bytes = bytes?ensureUint(bytes): maxBytes(integer)
+export function Uint8BE(int, bytes) {
+   int = ensureUint(int);
+   bytes = bytes?ensureUint(bytes): maxBytes(int)
    const upper = 2 ** (8 * bytes) - 1;
-   if (integer > upper) return TypeError(`integer can't be more than ${upper} `)
+   if (int > upper) return TypeError(`integer can't be more than ${upper} `)
    // Create the Uint8Array with the specified number of bytes
    const uint8 = new Uint8Array(bytes);
 
@@ -18,7 +18,7 @@ export function Uint8BE(integer, bytes) {
    for (let i = 0; i < bytes; i++) {
       const index = bytes - 1 - i
       const shiftAmount = index * 8; // Calculate shift amount based on byte index
-      uint8[i] = (integer >> shiftAmount) & 0xff; // Shift and mask to get the current byte integer
+      uint8[i] = (int >> shiftAmount) & 0xff; // Shift and mask to get the current byte integer
    }
    return uint8;
 }
@@ -53,14 +53,14 @@ export function Uint32BE(int) {
  * maxBytes(255) = 1
  * maxBytes(256) = 2
  * ```
- * @param {number|string} integer - either number or string containing number
+ * @param {number|string} int - either number or string containing number
  * @returns 
  */
-export function maxBytes(integer) {
-   integer = ensureInteger(integer)
+export function maxBytes(int) {
+   int = ensureInteger(int)
    let b = 1;
    while (true) {
-      if (2 ** (b * 8) > integer) return b;
+      if (2 ** (b * 8) > int) return b;
       b++
    }
 }

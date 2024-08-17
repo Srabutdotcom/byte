@@ -7,22 +7,16 @@
  * 
  * throw TypeError if string can't be converted to integer 
  * 
- * @param {number|string} integer 
+ * @param {number|string} int 
  * @returns {integer} integer
  */
-export function ensureInteger(integer) {
-   integer = +Number(integer).toFixed(0);
-   const pass = Number.isInteger(integer)
+export function ensureInteger(int) {
+   int = +Number(int).toFixed(0);
+   const pass = Number.isInteger(int)
    if (!pass) throw TypeError(`expected integer but got ${integer}`);
-   return integer
+   return int
 }
 
-/**
- * ! @preserve
- *@typedef {number} integer 
- *integer positive or negative
- */
- 
 /**! @preserve
  *@typedef {number} uint 
  *positive integer
@@ -30,23 +24,23 @@ export function ensureInteger(integer) {
 
 /**! @preserve
  * return positive integer or throw TypeError
- * @param {number|string} integer
+ * @param {number|string} int
  * @returns {uint} positive integer 
  */
-export function ensureUint(integer) {
-   integer = ensureInteger(integer);
-   if (integer < 0) throw TypeError(`expected positive integer but got ${integer}`)
-   return integer;
+export function ensureUint(int) {
+   int = ensureInteger(int);
+   if (int < 0) throw TypeError(`expected positive integer but got ${int}`)
+   return int;
 }
 
 /**
  * ! @preserve
  * return positive integer or throw TypeError
- * @param {number|string} integer 
+ * @param {number|string} int 
  * @returns {uint} positive integer 
  */
-export function uint(integer){
-   return ensureUint(integer)
+export function uint(int){
+   return ensureUint(int)
 }
 
 /**
@@ -57,9 +51,9 @@ export function uint(integer){
  * 
  * throw TypeError if string can't be converted to integer 
  * 
- * @param {number|string} integer 
+ * @param {number|string} int 
  * @returns {integer} integer
  */
-export function integer(integer){
-   return ensureInteger(integer)
+export function integer(int){
+   return ensureInteger(int)
 }
