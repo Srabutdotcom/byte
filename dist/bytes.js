@@ -1,6 +1,6 @@
 // @ts-self-types="./bytes.d.ts"
 // concat.js
-/** !@preserve
+/** 
  * Concate two or more Uint8Array to one Uint8Array
  * @param  {...Uint8Array} bs [Uint8Array]
  * @returns {Uint8Array} Uint8Array
@@ -9,72 +9,98 @@ function concat(...bs) {
   const l = bs.reduce((ac, ar) => ac + (ar?.length ?? 0), 0);
   const r = new Uint8Array(l);
   let o = 0;
-  for (const e of bs) {
-    r.set(e, o);
-    o += e?.length;
+  for (const e2 of bs) {
+    r.set(e2, o);
+    o += e2?.length;
   }
   return r;
 }
 
 // integer.js
-/**!@preserve
+/**
+ * 
  * return integer from string or number.
  * 
  * if string contain a floating number then it will be converted to integer
  * 
  * throw TypeError if string can't be converted to integer 
+ * 
  * @param {number|string} integer 
  * @returns {integer} integer
  */
-function ensureInteger(integer) {
-  integer = +Number(integer).toFixed(0);
-  const pass = Number.isInteger(integer);
+function ensureInteger(integer2) {
+  integer2 = +Number(integer2).toFixed(0);
+  const pass = Number.isInteger(integer2);
   if (!pass)
-    throw TypeError(`expected integer but got ${integer}`);
-  return integer;
+    throw TypeError(`expected integer but got ${integer2}`);
+  return integer2;
 }
-/**!@preserve
+/**
+ * 
  *@typedef {number} integer 
  *integer positive or negative
  */
-/**!@preserve
+/**
  *@typedef {number} uint 
  *positive integer
  */
-/**!@preserve
+/**
  * return positive integer or throw TypeError
  * @param {number|string} integer
  * @returns {uint} positive integer 
  */
-function ensureUint(integer) {
-  integer = ensureInteger(integer);
-  if (integer < 0)
-    throw TypeError(`expected positive integer but got ${integer}`);
-  return integer;
+function ensureUint(integer2) {
+  integer2 = ensureInteger(integer2);
+  if (integer2 < 0)
+    throw TypeError(`expected positive integer but got ${integer2}`);
+  return integer2;
+}
+/**
+ * 
+ * return positive integer or throw TypeError
+ * @param {number|string} integer 
+ * @returns {uint} positive integer 
+ */
+function uint(integer2) {
+  return ensureUint(integer2);
+}
+/**
+ * 
+ * return integer from string or number.
+ * 
+ * if string contain a floating number then it will be converted to integer
+ * 
+ * throw TypeError if string can't be converted to integer 
+ * 
+ * @param {number|string} integer 
+ * @returns {integer} integer
+ */
+function integer(integer2) {
+  return ensureInteger(integer2);
 }
 
 // set.js
-/**!@preserve
+/**
  * convert an integer value to Uint8Array
  * @param {number|string} integer 
  * @param {number|string} bytes 
  * @returns 
  */
-function Uint8BE(integer, bytes) {
-  integer = ensureUint(integer);
-  bytes = bytes ? ensureUint(bytes) : maxBytes(integer);
+function Uint8BE(integer2, bytes) {
+  integer2 = ensureUint(integer2);
+  bytes = bytes ? ensureUint(bytes) : maxBytes(integer2);
   const upper = 2 ** (8 * bytes) - 1;
-  if (integer > upper)
+  if (integer2 > upper)
     return TypeError(`integer can't be more than ${upper} `);
   const uint8 = new Uint8Array(bytes);
   for (let i = 0; i < bytes; i++) {
     const index = bytes - 1 - i;
     const shiftAmount = index * 8;
-    uint8[i] = integer >> shiftAmount & 255;
+    uint8[i] = integer2 >> shiftAmount & 255;
   }
   return uint8;
 }
-/**!@preserve
+/**
  * convert an integer value below 65536 (16 bits or 2 bytes) to Uint8Array
  * @param {number|string} int 
  * @returns 
@@ -82,7 +108,7 @@ function Uint8BE(integer, bytes) {
 function Uint16BE(int) {
   return Uint8BE(int, 2);
 }
-/**!@preserve
+/**
  * convert an integer value below 16777216 (24 bits or 3 bytes) to Uint8Array
  * @param {number|string} int 
  * @returns 
@@ -90,7 +116,7 @@ function Uint16BE(int) {
 function Uint24BE(int) {
   return Uint8BE(int, 3);
 }
-/**!@preserve
+/**
  * convert an integer value below 4294967296 (32 bits or 4 bytes) to Uint8Array
  * @param {number|string} int 
  * @returns 
@@ -98,7 +124,7 @@ function Uint24BE(int) {
 function Uint32BE(int) {
   return Uint8BE(int, 4);
 }
-/**!@preserve
+/**
  * return the maximum byte number to store the integer
  * ```
  * maxBytes(255) = 1
@@ -107,21 +133,21 @@ function Uint32BE(int) {
  * @param {number|string} integer - either number or string containing number
  * @returns 
  */
-function maxBytes(integer) {
-  integer = ensureInteger(integer);
+function maxBytes(integer2) {
+  integer2 = ensureInteger(integer2);
   let b = 1;
   while (true) {
-    if (2 ** (b * 8) > integer)
+    if (2 ** (b * 8) > integer2)
       return b;
     b++;
   }
 }
 
 // get.js
-/** !@preserve
+/** 
  * @typedef {number} uint positive integer
 */
-/** !@preserve
+/** 
  * @param {Uint8Array} data 
  * @param {uint} pos 
  * @param {uint} length 
@@ -147,7 +173,7 @@ function getUint8BE(data, pos = 0, length = 1) {
   }
   return output;
 }
-/**!@preserve
+/**
  * get positive integer from 8 bytes array
  * @param {Uint8Array} data 
  * @param {uint} pos 
@@ -156,7 +182,7 @@ function getUint8BE(data, pos = 0, length = 1) {
 function getUint8(data, pos) {
   return getUint8BE(data, pos, 1);
 }
-/**!@preserve
+/**
  * get positive integer from 16 bytes array
  * @param {Uint8Array} data 
  * @param {uint} pos 
@@ -165,7 +191,7 @@ function getUint8(data, pos) {
 function getUint16(data, pos) {
   return getUint8BE(data, pos, 2);
 }
-/**!@preserve
+/**
  * get positive integer from 24 bytes array
  * @param {Uint8Array} data 
  * @param {uint} pos 
@@ -174,7 +200,7 @@ function getUint16(data, pos) {
 function getUint24(data, pos) {
   return getUint8BE(data, pos, 3);
 }
-/** !@preserve
+/** 
  * get positive integer from 32 bytes array
  * @param {Uint8Array} data 
  * @param {uint} pos 
@@ -183,6 +209,43 @@ function getUint24(data, pos) {
 function getUint32(data, pos) {
   return getUint8BE(data, pos, 4);
 }
+
+// uint8array.js
+/**
+ * 
+ * to return Uint8Array from Uint8Array, string, or array
+ * @param {Uint8Array|Array|string} data 
+ */
+function uint8array(data) {
+  if (data instanceof Uint8Array)
+    return data;
+  const enc = new TextEncoder();
+  if (typeof data == "string")
+    return enc.encode(data);
+  if (Array.isArray(data)) {
+    return concat(data.map((e2) => {
+      if (typeof e2 == "number") {
+        return Uint8BE(uint(e2));
+      }
+      if (typeof e2 == "string") {
+        return enc.encode(e2);
+      }
+      if (Object.hasOwn(e2, "toString")) {
+        return enc.encode(e2.toString());
+      }
+      throw TypeError(`can't convert data to Uint8Array`);
+    }));
+  }
+  if (Object.hasOwn(e, "toString")) {
+    return enc.encode(e.toString());
+  }
+  throw TypeError(`can't convert data to Uint8Array`);
+}
+
+// mod.js
+/**
+ * @ts-self-types="./bytes.d.ts"
+ */
 export {
   Uint16BE,
   Uint24BE,
@@ -196,5 +259,8 @@ export {
   getUint32,
   getUint8,
   getUint8BE,
-  maxBytes
+  integer,
+  maxBytes,
+  uint,
+  uint8array
 };

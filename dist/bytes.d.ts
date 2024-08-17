@@ -30,24 +30,27 @@ export function Uint32BE(int: number | string): TypeError | Uint8Array;
  * @param {number|string} bytes
  * @returns
  */
-export function Uint8BE(integer: number | string, bytes: number | string): TypeError | Uint8Array;
+export function Uint8BE(integer2: any, bytes: number | string): TypeError | Uint8Array;
 /** ! @preserve
  * Concate two or more Uint8Array to one Uint8Array
  * @param  {...Uint8Array} bs [Uint8Array]
  * @returns {Uint8Array} Uint8Array
  */
 export function concat(...bs: Uint8Array[]): Uint8Array;
-/**! @preserve
+/**
+ * ! @preserve
  * return integer from string or number.
  *
  * if string contain a floating number then it will be converted to integer
  *
  * throw TypeError if string can't be converted to integer
+ *
  * @param {number|string} integer
  * @returns {integer} integer
  */
-export function ensureInteger(integer: number | string): integer;
-/**! @preserve
+export function ensureInteger(integer2: any): integer;
+/**
+ * ! @preserve
  *@typedef {number} integer
  *integer positive or negative
  */
@@ -60,7 +63,7 @@ export function ensureInteger(integer: number | string): integer;
  * @param {number|string} integer
  * @returns {uint} positive integer
  */
-export function ensureUint(integer: number | string): uint;
+export function ensureUint(integer2: any): uint;
 /**! @preserve
  * get positive integer from 16 bytes array
  * @param {Uint8Array} data
@@ -100,6 +103,18 @@ export function getUint8(data: Uint8Array, pos: uint): uint;
        the position is out of bounds, or the length is less than 1.
  */
 export function getUint8BE(data: Uint8Array, pos?: uint, length?: uint): uint;
+/**
+ * ! @preserve
+ * return integer from string or number.
+ *
+ * if string contain a floating number then it will be converted to integer
+ *
+ * throw TypeError if string can't be converted to integer
+ *
+ * @param {number|string} integer
+ * @returns {integer} integer
+ */
+export function integer(integer2: any): integer;
 /**! @preserve
  * return the maximum byte number to store the integer
  * ```
@@ -109,4 +124,17 @@ export function getUint8BE(data: Uint8Array, pos?: uint, length?: uint): uint;
  * @param {number|string} integer - either number or string containing number
  * @returns
  */
-export function maxBytes(integer: number | string): number;
+export function maxBytes(integer2: any): number;
+/**
+ * ! @preserve
+ * return positive integer or throw TypeError
+ * @param {number|string} integer
+ * @returns {uint} positive integer
+ */
+export function uint(integer2: any): uint;
+/**
+ * ! @preserve
+ * to return Uint8Array from Uint8Array, string, or array
+ * @param {Uint8Array|Array|string} data
+ */
+export function uint8array(data: Uint8Array | any[] | string): any;
