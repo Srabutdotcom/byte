@@ -1,5 +1,4 @@
 // @ts-self-types="./bytes.d.ts"
-// deno-lint-ignore-file no-explicit-any no-var
 // concat.js
 /** 
  * Concate two or more Uint8Array to one Uint8Array
