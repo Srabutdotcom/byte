@@ -12,6 +12,10 @@ Deno.test("uint8 and its variance test", () => {
    assertEquals(new Uint8Array([255, 255, 255, 255]), Uint8BE(2 ** (8 * 4) - 1), 4);
 })
 
+let expected = 2 ** (8 * 4) - 1;
+let actual = getUint32(new Uint8Array([255, 255, 255, 255]));
+debugger;
+
 Deno.test(
    "get uint",
    ()=>{

@@ -31,9 +31,10 @@ export function Uint32BE(int: number | string): TypeError | Uint8Array;
 export function Uint8BE(int: number | string, bytes: number | string): TypeError | Uint8Array;
 /**
  * Concate two or more Uint8Array to one Uint8Array
- * @param  {Uint8Array[]} uint8s [Uint8Array]
+ * @param  {Uint8Array[]} _uint8s [Uint8Array]
  * @returns {Uint8Array} Uint8Array
- */export function concat(..._uint8s: any[]): Uint8Array;
+ */
+export function concat(..._uint8s: Uint8Array[]): Uint8Array;
 /**
  *
  * return integer from string or number.
@@ -81,7 +82,6 @@ export function getUint32(data: Uint8Array, pos: uint): uint;
  * @returns {uint}
  */
 export function getUint8(data: Uint8Array, pos: uint): uint;
-
 /**
  * @param {Uint8Array} data
  * @param {uint} pos

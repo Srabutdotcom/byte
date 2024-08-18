@@ -22,6 +22,12 @@ export function getUint8BE(data, pos = 0, length = 1) {
       throw TypeError(`length is beyond data.length`)
    }
 
+   if(length==4){
+      const dataView = new DataView(data.buffer);
+      const value = dataView.getUint32(0, false); // Assuming big-endian
+      return value
+   }
+
    // Use a loop to handle bytes of any length
    let output = 0;
    for (let i = pos; i < pos + length; i++) {

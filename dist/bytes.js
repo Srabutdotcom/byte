@@ -169,6 +169,11 @@ function getUint8BE(data, pos = 0, length = 1) {
   if (pos + length > data.length) {
     throw TypeError(`length is beyond data.length`);
   }
+  if (length == 4) {
+    const dataView = new DataView(data.buffer);
+    const value = dataView.getUint32(0, false);
+    return value;
+  }
   let output = 0;
   for (let i = pos; i < pos + length; i++) {
     output = output << 8 | data[i];
