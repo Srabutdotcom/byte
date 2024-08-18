@@ -15,22 +15,21 @@ Deno.test("uint8 and its variance test", () => {
 Deno.test(
    "get uint",
    ()=>{
-      let expected = new Uint8Array([8])
-      let actual = getUint8(expected);
+      let expected = 8
+      let actual = getUint8(new Uint8Array([8]));debugger;
       assertEquals(actual, expected);
 
-      expected = new Uint8Array([255, 255]);
-      actual = getUint16(expected)
+      expected = 2 ** (8 * 2) - 1;
+      actual = getUint16(new Uint8Array([255, 255]))
       assertEquals(actual, expected);
 
-      expected = new Uint8Array([255, 255, 255]);
-      actual = getUint24(expected)
+      expected = 2 ** (8 * 3) - 1;
+      actual = getUint24(new Uint8Array([255, 255, 255]))
       assertEquals(actual, expected);
 
-      expected = new Uint8Array([255, 255, 255, 255]);
-      actual = getUint32(expected)
+      expected = 2 ** (8 * 4) - 1;
+      actual = getUint32(new Uint8Array([255, 255, 255, 255]))
       assertEquals(actual, expected);
-
    }
 )
 
