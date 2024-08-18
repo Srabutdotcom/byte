@@ -2,18 +2,28 @@
 // concat.js
 /** 
  * Concate two or more Uint8Array to one Uint8Array
- * @param  {...Uint8Array} bs [Uint8Array]
+ * @param  {Uint8Array[]} uint8s [Uint8Array]
  * @returns {Uint8Array} Uint8Array
  */
-function concat(...bs) {
-  const l = bs.reduce((ac, ar) => ac + (ar?.length ?? 0), 0);
+function concat(..._uint8s) {
+  _uint8s = uint8s(_uint8s);
+  const l = _uint8s.reduce((ac, ar) => ac + (ar?.length ?? 0), 0);
   const r = new Uint8Array(l);
   let o = 0;
-  for (const e2 of bs) {
+  for (const e2 of _uint8s) {
     r.set(e2, o);
     o += e2?.length;
   }
   return r;
+}
+function uint8s(_uint8s) {
+  return _uint8s.map((e2) => {
+    if (e2 instanceof Uint8Array)
+      return e2;
+    if (Array.isArray(e2))
+      return new Uint8Array(e2);
+    throw TypeError(`Elements must be Uint8Array or Array`);
+  });
 }
 
 // integer.js
@@ -150,14 +160,11 @@ function maxBytes(int) {
        the position is out of bounds, or the length is less than 1.
  */
 function getUint8BE(data, pos = 0, length = 1) {
-  if (!(data instanceof Uint8Array)) {
-    throw new TypeError("Input data must be a byte array");
-  }
-  if (pos < 0 || pos >= data.length) {
+  data = uint8array(data);
+  pos = uint(pos);
+  length = uint(length);
+  if (pos >= data.length) {
     throw new TypeError("Position is out of bounds");
-  }
-  if (length < 1) {
-    throw new TypeError("Length must be at least 1");
   }
   if (pos + length > data.length) {
     throw TypeError(`length is beyond data.length`);
@@ -208,8 +215,8 @@ function getUint32(data, pos) {
 // uint8array.js
 /**
  * 
- * to return Uint8Array from Uint8Array, string, or array
- * @param {Uint8Array|Array|string} data 
+ * to return Uint8Array from Uint8Array, string, number or array
+ * @param {Uint8Array|Array|string|number} data 
  */
 function uint8array(data) {
   if (data instanceof Uint8Array)
@@ -217,8 +224,12 @@ function uint8array(data) {
   const enc = new TextEncoder();
   if (typeof data == "string")
     return enc.encode(data);
+  if (typeof data == "number")
+    return Uint8BE(uint(data));
   if (Array.isArray(data)) {
     return concat(data.map((e2) => {
+      if (e2 instanceof Uint8Array)
+        return e2;
       if (typeof e2 == "number") {
         return Uint8BE(uint(e2));
       }

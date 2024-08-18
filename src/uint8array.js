@@ -1,15 +1,17 @@
 import { concat, Uint8BE, uint } from "./mod.js";
 /**
  * ! @preserve
- * to return Uint8Array from Uint8Array, string, or array
- * @param {Uint8Array|Array|string} data 
+ * to return Uint8Array from Uint8Array, string, number or array
+ * @param {Uint8Array|Array|string|number} data 
  */
 export function uint8array(data){
    if(data instanceof Uint8Array)return data;
    const enc = new TextEncoder;
    if(typeof data == 'string')return enc.encode(data);
+   if(typeof data == 'number')return Uint8BE(uint(data))
    if(Array.isArray(data)){
       return concat(data.map(e=>{
+         if(e instanceof Uint8Array) return e
          if(typeof e =='number'){
             return Uint8BE(uint(e))
          }

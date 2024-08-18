@@ -1,4 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
+
 /**
  * positive integer
  */
@@ -30,10 +31,9 @@ export function Uint32BE(int: number | string): TypeError | Uint8Array;
 export function Uint8BE(int: number | string, bytes: number | string): TypeError | Uint8Array;
 /**
  * Concate two or more Uint8Array to one Uint8Array
- * @param  {...Uint8Array} bs [Uint8Array]
+ * @param  {Uint8Array[]} uint8s [Uint8Array]
  * @returns {Uint8Array} Uint8Array
- */
-export function concat(...bs: Uint8Array[]): Uint8Array;
+ */export function concat(..._uint8s: any[]): Uint8Array;
 /**
  *
  * return integer from string or number.
@@ -121,7 +121,7 @@ export function maxBytes(int: number | string): number;
 export function uint(int: number | string): uint;
 /**
  *
- * to return Uint8Array from Uint8Array, string, or array
- * @param {Uint8Array|Array|string} data
+ * to return Uint8Array from Uint8Array, string, number or array
+ * @param {Uint8Array|Array|string|number} data
  */
-export function uint8array(data: Uint8Array | any[] | string): any;
+export function uint8array(data: Uint8Array | any[] | string | number): any;

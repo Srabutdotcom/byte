@@ -9,3 +9,12 @@ Deno.test("concat test", () => {
       new Uint8Array([5, 6])
    ))
 })
+
+Deno.test(
+   "concat array",
+   ()=>{
+      const actual = concat([0,2],[5,6])
+      const expected = new Uint8Array([0, 2, 5, 6]);
+      assertEquals(actual, expected)
+   }
+)

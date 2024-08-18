@@ -1,3 +1,4 @@
+import { uint8array, uint } from "./mod.js";
 /** ! @preserve
  * @typedef {number} uint positive integer
 */
@@ -9,17 +10,12 @@
        the position is out of bounds, or the length is less than 1.
  */
 export function getUint8BE(data, pos = 0, length = 1) {
-   
-   if (!(data instanceof Uint8Array)) {
-      throw new TypeError("Input data must be a byte array");
-   }
+   data = uint8array(data)
+   pos = uint(pos);
+   length = uint(length)
 
-   if (pos < 0 || pos >= data.length) {
+   if (pos >= data.length) {
       throw new TypeError("Position is out of bounds");
-   }
-
-   if (length < 1) {
-      throw new TypeError("Length must be at least 1");
    }
 
    if (pos + length > data.length) {
