@@ -1,6 +1,6 @@
 {
   "name": "@aicone/byte",
-  "version": "0.1.12",
+  "version": "0.2.0",
   "exports": "./dist/bytes.js",
   "publish":{
     "exclude": ["dist/tsconfig.json"]

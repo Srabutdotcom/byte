@@ -305,80 +305,21 @@ function getUint32(data, pos) {
 var Byte = class {
   static get = {
     BE: {
-      /**
-       * ! @preserve
-       * @param {Uint8Array} data 
-       * @param {Uint} pos 
-       * @returns {Uint}
-       */
-      b8(data, pos) {
-        return getUint8(data, pos);
-      },
-      /**
-       * ! @preserve
-       * @param {Uint8Array} data 
-       * @param {Uint} pos 
-       * @returns {Uint}
-       */
-      b16(data, pos) {
-        return getUint16(data, pos);
-      },
-      /**
-       * ! @preserve
-       * @param {Uint8Array} data 
-       * @param {Uint} pos 
-       * @returns {Uint}
-       */
-      b24(data, pos) {
-        return getUint24(data, pos);
-      },
-      /**
-       * ! @preserve
-       * @param {Uint8Array} data 
-       * @param {Uint} pos 
-       * @returns {Uint}
-       */
-      b32(data, pos) {
-        return getUint32(data, pos);
-      }
+      b8: getUint8,
+      b16: getUint16,
+      b24: getUint24,
+      b32: getUint32
     }
   };
   static set = {
     BE: {
-      /**
-       * ! @preserve
-       * @param {Uint} int 
-       * @returns {Uint8Array}
-       */
-      b8(int) {
-        return Uint8BE(int);
-      },
-      /**
-       * ! @preserve
-       * @param {Uint} int 
-       * @returns {Uint8Array}
-       */
-      b16(int) {
-        return Uint16BE(int);
-      },
-      /**
-       * ! @preserve
-       * @param {Uint} int 
-       * @returns {Uint8Array}
-       */
-      b24(int) {
-        return Uint24BE(int);
-      },
-      /**
-       * ! @preserve
-       * @param {Uint} int 
-       * @returns {Uint8Array}
-       */
-      b32(int) {
-        return Uint32BE(int);
-      }
+      b8: Uint8BE,
+      b16: Uint16BE,
+      b24: Uint24BE,
+      b32: Uint32BE
     }
   };
+  static concat = concat;
 };
 
 // mod.js

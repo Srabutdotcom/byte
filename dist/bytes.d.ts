@@ -6,100 +6,21 @@ export var Byte: {
     new (): {};
     get: {
         BE: {
-            /**
-             * ! @preserve
-             * @param {Uint8Array} data
-             * @param {Uint} pos
-             * @returns {Uint}
-             */
-            b8(data: Uint8Array, pos: {
-                "__#2@#value": any;
-                valueOf(): any;
-            }): {
-                "__#2@#value": any;
-                valueOf(): any;
-            };
-            /**
-             * ! @preserve
-             * @param {Uint8Array} data
-             * @param {Uint} pos
-             * @returns {Uint}
-             */
-            b16(data: Uint8Array, pos: {
-                "__#2@#value": any;
-                valueOf(): any;
-            }): {
-                "__#2@#value": any;
-                valueOf(): any;
-            };
-            /**
-             * ! @preserve
-             * @param {Uint8Array} data
-             * @param {Uint} pos
-             * @returns {Uint}
-             */
-            b24(data: Uint8Array, pos: {
-                "__#2@#value": any;
-                valueOf(): any;
-            }): {
-                "__#2@#value": any;
-                valueOf(): any;
-            };
-            /**
-             * ! @preserve
-             * @param {Uint8Array} data
-             * @param {Uint} pos
-             * @returns {Uint}
-             */
-            b32(data: Uint8Array, pos: {
-                "__#2@#value": any;
-                valueOf(): any;
-            }): {
-                "__#2@#value": any;
-                valueOf(): any;
-            };
+            b8: typeof getUint8;
+            b16: typeof getUint16;
+            b24: typeof getUint24;
+            b32: typeof getUint32;
         };
     };
     set: {
         BE: {
-            /**
-             * ! @preserve
-             * @param {Uint} int
-             * @returns {Uint8Array}
-             */
-            b8(int: {
-                "__#2@#value": any;
-                valueOf(): any;
-            }): Uint8Array;
-            /**
-             * ! @preserve
-             * @param {Uint} int
-             * @returns {Uint8Array}
-             */
-            b16(int: {
-                "__#2@#value": any;
-                valueOf(): any;
-            }): Uint8Array;
-            /**
-             * ! @preserve
-             * @param {Uint} int
-             * @returns {Uint8Array}
-             */
-            b24(int: {
-                "__#2@#value": any;
-                valueOf(): any;
-            }): Uint8Array;
-            /**
-             * ! @preserve
-             * @param {Uint} int
-             * @returns {Uint8Array}
-             */
-            b32(int: {
-                "__#2@#value": any;
-                valueOf(): any;
-            }): Uint8Array;
+            b8: typeof Uint8BE;
+            b16: typeof Uint16BE;
+            b24: typeof Uint24BE;
+            b32: typeof Uint32BE;
         };
     };
+    concat: typeof concat;
 };
 export var Integer: {
     new (v: any): {
