@@ -1,9 +1,10 @@
 import { ensureInteger, ensureUint } from "./integer.js";
 
-/**! @preserve
+/**
+ * ! @preserve
  * convert an integer value to Uint8Array
  * @param {number|string} int 
- * @param {number|string} bytes 
+ * @param {1|2|3|4|"1"|"2"|"3"|"4"} bytes 
  * @returns 
  */
 export function Uint8BE(int, bytes) {
@@ -22,7 +23,8 @@ export function Uint8BE(int, bytes) {
    }
    return uint8;
 }
-/**! @preserve
+/**
+ * ! @preserve
  * convert an integer value below 65536 (16 bits or 2 bytes) to Uint8Array
  * @param {number|string} int 
  * @returns 
@@ -30,7 +32,8 @@ export function Uint8BE(int, bytes) {
 export function Uint16BE(int) {
    return Uint8BE(int, 2);
 }
-/**! @preserve
+/**
+ * ! @preserve
  * convert an integer value below 16777216 (24 bits or 3 bytes) to Uint8Array
  * @param {number|string} int 
  * @returns 
@@ -38,7 +41,8 @@ export function Uint16BE(int) {
 export function Uint24BE(int) {
    return Uint8BE(int, 3);
 }
-/**! @preserve
+/**
+ * ! @preserve
  * convert an integer value below 4294967296 (32 bits or 4 bytes) to Uint8Array
  * @param {number|string} int 
  * @returns 
@@ -47,7 +51,8 @@ export function Uint32BE(int) {
    return Uint8BE(int, 4);
 }
 
-/**! @preserve
+/**
+ * ! @preserve
  * return the maximum byte number to store the integer
  * ```
  * maxBytes(255) = 1

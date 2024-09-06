@@ -13,7 +13,7 @@
 export function ensureInteger(int) {
    int = +Number(int).toFixed(0);
    const pass = Number.isInteger(int)
-   if (!pass) throw TypeError(`expected integer but got ${integer}`);
+   if (!pass) throw TypeError(`expected integer but got ${int}`);
    return int
 }
 
@@ -39,7 +39,7 @@ export function ensureUint(int) {
  * @param {number|string} int 
  * @returns {uint} positive integer 
  */
-export function uint(int){
+export function uint(int) {
    return ensureUint(int)
 }
 
@@ -54,6 +54,45 @@ export function uint(int){
  * @param {number|string} int 
  * @returns {integer} integer
  */
-export function integer(int){
+export function integer(int) {
    return ensureInteger(int)
+}
+
+/**
+ * Integer - represent integer value positive or negative
+ */
+export class Integer {
+   /**
+    * To create Integer Object
+    * @param {string|number} v 
+    * @returns 
+    */
+   static new(v) {
+      v = ensureInteger(v);
+      return new Integer(v);
+   }
+   #value
+   constructor(v) {
+      this.#value = v
+   }
+   valueOf() { return this.#value }
+}
+/**
+ * Uint - represent positive integer value
+ */
+export class Uint {
+   /**
+    * To create Uint Object
+    * @param {string|number} v 
+    * @returns 
+    */
+   static new(v) {
+      v = ensureUint(v);
+      return new Uint(v);
+   }
+   #value
+   constructor(v) {
+      this.#value = v
+   }
+   valueOf() { return this.#value }
 }

@@ -1,12 +1,15 @@
-import { uint8array, uint } from "./mod.js";
-/** ! @preserve
+import { uint8array } from "./uint8array.js";
+import { Uint, uint } from "./integer.js";
+/** 
+ * ! @preserve
  * @typedef {number} uint positive integer
 */
-/** ! @preserve
+/** 
+ * ! @preserve
  * @param {Uint8Array} data 
- * @param {uint} pos 
- * @param {uint} length 
- * @returns {uint} The unsigned integer value, or throws an error if the provided data is not a byte array,
+ * @param {Uint} pos 
+ * @param {Uint} length 
+ * @returns {Uint} The unsigned integer value, or throws an error if the provided data is not a byte array,
        the position is out of bounds, or the length is less than 1.
  */
 export function getUint8BE(data, pos = 0, length = 1) {
@@ -37,41 +40,45 @@ export function getUint8BE(data, pos = 0, length = 1) {
    return output;
 }
 
-/**! @preserve
+/**
+ * ! @preserve
  * get positive integer from 8 bytes array
  * @param {Uint8Array} data 
- * @param {uint} pos 
- * @returns {uint}
+ * @param {Uint} pos 
+ * @returns {Uint}
  */
 export function getUint8(data, pos) {
    return getUint8BE(data, pos, 1);
 }
 
-/**! @preserve
+/**
+ * ! @preserve
  * get positive integer from 16 bytes array
  * @param {Uint8Array} data 
- * @param {uint} pos 
- * @returns {uint}
+ * @param {Uint} pos 
+ * @returns {Uint}
  */
 export function getUint16(data, pos) {
    return getUint8BE(data, pos, 2);
 }
 
-/**! @preserve
+/**
+ * ! @preserve
  * get positive integer from 24 bytes array
  * @param {Uint8Array} data 
- * @param {uint} pos 
- * @returns {uint}
+ * @param {Uint} pos 
+ * @returns {Uint}
  */
 export function getUint24(data, pos) {
    return getUint8BE(data, pos, 3);
 }
 
-/** ! @preserve
+/** 
+ * ! @preserve
  * get positive integer from 32 bytes array
  * @param {Uint8Array} data 
- * @param {uint} pos 
- * @returns {uint}
+ * @param {Uint} pos 
+ * @returns {Uint}
  */
 export function getUint32(data, pos) {
    return getUint8BE(data, pos, 4);
