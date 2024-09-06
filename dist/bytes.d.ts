@@ -1,9 +1,11 @@
+
+// deno-lint-ignore-file no-explicit-any
 /**
  * positive integer
  */
 export type uint = number;
 export var Byte: {
-    new (): {};
+    new (): Record<any,any>;
     get: {
         BE: {
             b8: typeof getUint8;
