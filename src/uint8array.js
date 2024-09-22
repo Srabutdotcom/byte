@@ -2,7 +2,6 @@ import { concat } from "./concat.js";
 import { Uint8BE } from "./set.js";
 import { uint } from "./integer.js";
 /**
- * ! @preserve
  * to return Uint8Array from Uint8Array, string, number or array
  * @param {Uint8Array|Array|string|number} data 
  */

@@ -1,6 +1,5 @@
 
 /**
- * ! @preserve
  * return integer from string or number.
  * 
  * if string contain a floating number then it will be converted to integer
@@ -17,12 +16,7 @@ export function ensureInteger(int) {
    return int
 }
 
-/**! @preserve
- *@typedef {number} uint 
- *positive integer
- */
-
-/**! @preserve
+/**
  * return positive integer or throw TypeError
  * @param {number|string} int
  * @returns {uint} positive integer 
@@ -34,7 +28,6 @@ export function ensureUint(int) {
 }
 
 /**
- * ! @preserve
  * return positive integer or throw TypeError
  * @param {number|string} int 
  * @returns {uint} positive integer 
@@ -44,7 +37,6 @@ export function uint(int) {
 }
 
 /**
- * ! @preserve
  * return integer from string or number.
  * 
  * if string contain a floating number then it will be converted to integer

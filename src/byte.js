@@ -2,6 +2,9 @@ import { concat } from "./concat.js";
 import * as get from "./get.js";
 import * as set from "./set.js";
 
+/**
+ * Byte, collection of byte function
+ */
 export class Byte {
    static get = {
       BE: {

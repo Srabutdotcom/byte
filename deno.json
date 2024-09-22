@@ -1,12 +1,12 @@
 {
   "name": "@aicone/byte",
-  "version": "0.2.1",
-  "exports": "./dist/bytes.js",
+  "version": "0.3.0",
+  "exports": "./src/mod.js",
   "publish":{
-    "exclude": ["dist/tsconfig.json"]
+    "exclude": ["dist/tsconfig.json", "dist/"]
   },
   "lint":{
-    "include": ["dist/"],
+    "include": ["src/"],
     "rules": {
       "exclude": ["no-var", "no-explicit-any", "no-slow-types"]
     }

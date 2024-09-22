@@ -1,15 +1,12 @@
 import { uint8array } from "./uint8array.js";
 import { Uint, uint } from "./integer.js";
+
 /** 
- * ! @preserve
- * @typedef {number} uint positive integer
-*/
-/** 
- * ! @preserve
+ * return value from bytes
  * @param {Uint8Array} data 
- * @param {Uint} pos 
- * @param {Uint} length 
- * @returns {Uint} The unsigned integer value, or throws an error if the provided data is not a byte array,
+ * @param {number} pos - positive integer, represent byteoffset. 
+ * @param {number} length - positive integer, represent the length of byte
+ * @returns {number} Positive integer value, or throws an error if the provided data is not a byte array,
        the position is out of bounds, or the length is less than 1.
  */
 export function getUint8BE(data, pos = 0, length = 1) {
@@ -25,9 +22,9 @@ export function getUint8BE(data, pos = 0, length = 1) {
       throw TypeError(`length is beyond data.length`)
    }
 
-   if(length==4){
+   if (length == 4) {
       const dataView = new DataView(data.buffer);
-      const value = dataView.getUint32(0, false); // Assuming big-endian
+      const value = dataView.getUint32(pos, false); // Assuming big-endian
       return value
    }
 
@@ -41,44 +38,44 @@ export function getUint8BE(data, pos = 0, length = 1) {
 }
 
 /**
- * ! @preserve
  * get positive integer from 8 bytes array
  * @param {Uint8Array} data 
- * @param {Uint} pos 
- * @returns {Uint}
+ * @param {number} pos - positive integer, represent byteoffset. 
+ * @returns {number} Positive integer value, or throws an error if the provided data is not a byte array,
+       the position is out of bounds, or the length is less than 1.
  */
 export function getUint8(data, pos) {
    return getUint8BE(data, pos, 1);
 }
 
 /**
- * ! @preserve
  * get positive integer from 16 bytes array
  * @param {Uint8Array} data 
- * @param {Uint} pos 
- * @returns {Uint}
+ * @param {number} pos - positive integer, represent byteoffset. 
+ * @returns {number} Positive integer value, or throws an error if the provided data is not a byte array,
+       the position is out of bounds, or the length is less than 1.
  */
 export function getUint16(data, pos) {
    return getUint8BE(data, pos, 2);
 }
 
 /**
- * ! @preserve
  * get positive integer from 24 bytes array
  * @param {Uint8Array} data 
- * @param {Uint} pos 
- * @returns {Uint}
+ * @param {number} pos - positive integer, represent byteoffset. 
+ * @returns {number} Positive integer value, or throws an error if the provided data is not a byte array,
+       the position is out of bounds, or the length is less than 1.
  */
 export function getUint24(data, pos) {
    return getUint8BE(data, pos, 3);
 }
 
 /** 
- * ! @preserve
  * get positive integer from 32 bytes array
  * @param {Uint8Array} data 
- * @param {Uint} pos 
- * @returns {Uint}
+ * @param {number} pos - positive integer, represent byteoffset. 
+ * @returns {number} Positive integer value, or throws an error if the provided data is not a byte array,
+       the position is out of bounds, or the length is less than 1.
  */
 export function getUint32(data, pos) {
    return getUint8BE(data, pos, 4);
