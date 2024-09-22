@@ -6,7 +6,7 @@
     "exclude": ["dist/tsconfig.json", "dist/"]
   },
   "lint":{
-    "include": ["src/"],
+    "include": ["src/", "type/"],
     "rules": {
       "exclude": ["no-var", "no-explicit-any", "no-slow-types"]
     }
