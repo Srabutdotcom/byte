@@ -1,6 +1,4 @@
-/**
- * @ts-self-types="../type/mod.d.ts"
- */
+//@ts-self-types="../type/mod.d.ts"
 export * from './concat.js';
 export * from "./integer.js";
 export * from './set.js';
