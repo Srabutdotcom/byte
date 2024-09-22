@@ -1,3 +1,4 @@
+//@ts-self-types="../type/get.d.ts"
 import { uint8array } from "./uint8array.js";
 import { uint } from "./integer.js";
 

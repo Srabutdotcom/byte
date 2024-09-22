@@ -1,3 +1,4 @@
+//@ts-self-types="../type/concat.d.ts"
 /** 
  * Concate two or more Uint8Array to one Uint8Array
  * @param  {Uint8Array[]} uint8s [Uint8Array]

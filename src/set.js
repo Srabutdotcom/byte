@@ -1,3 +1,4 @@
+//@ts-self-types="../type/set.d.ts"
 import { ensureInteger, ensureUint } from "./integer.js";
 
 /**

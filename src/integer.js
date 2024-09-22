@@ -1,4 +1,4 @@
-
+//@ts-self-types="../type/get.d.ts"
 /**
  * return integer from string or number.
  * 

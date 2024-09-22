@@ -1,3 +1,4 @@
+//@ts-self-types="../type/byte.d.ts"
 import { concat } from "./concat.js";
 import * as get from "./get.js";
 import * as set from "./set.js";

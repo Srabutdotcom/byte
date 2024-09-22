@@ -1,3 +1,4 @@
+//@ts-self-types="../type/uint8array.d.ts"
 import { concat } from "./concat.js";
 import { Uint8BE } from "./set.js";
 import { uint } from "./integer.js";
