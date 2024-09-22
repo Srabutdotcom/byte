@@ -6,21 +6,21 @@
  * throw TypeError if string can't be converted to integer
  *
  * @param {number|string} int
- * @returns {integer} integer
+ * @return {number} integer
  */
-export function ensureInteger(int: number | string): typeof integer;
+export function ensureInteger(int: number | string): number;
 /**
  * return positive integer or throw TypeError
  * @param {number|string} int
- * @returns {uint} positive integer
+ * @return {number} positive integer
  */
-export function ensureUint(int: number | string): typeof uint;
+export function ensureUint(int: number | string): number;
 /**
  * return positive integer or throw TypeError
  * @param {number|string} int
- * @returns {uint} positive integer
+ * @return {number} positive integer
  */
-export function uint(int: number | string): typeof uint;
+export function uint(int: number | string): number;
 /**
  * return integer from string or number.
  *
@@ -29,9 +29,9 @@ export function uint(int: number | string): typeof uint;
  * throw TypeError if string can't be converted to integer
  *
  * @param {number|string} int
- * @returns {integer} integer
+ * @return {number} integer
  */
-export function integer(int: number | string): typeof integer;
+export function integer(int: number | string): number;
 /**
  * Integer - represent integer value positive or negative
  */
@@ -39,7 +39,7 @@ export class Integer {
     /**
      * To create Integer Object
      * @param {string|number} v
-     * @returns
+     * @return
      */
     static "new"(v: string | number): Integer;
     constructor(v: any);
@@ -53,7 +53,7 @@ export class Uint {
     /**
      * To create Uint Object
      * @param {string|number} v
-     * @returns
+     * @return
      */
     static "new"(v: string | number): Uint;
     constructor(v: any);

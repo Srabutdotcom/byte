@@ -7,7 +7,7 @@
  * throw TypeError if string can't be converted to integer 
  * 
  * @param {number|string} int 
- * @returns {integer} integer
+ * @return {number} integer
  */
 export function ensureInteger(int) {
    int = +Number(int).toFixed(0);
@@ -19,7 +19,7 @@ export function ensureInteger(int) {
 /**
  * return positive integer or throw TypeError
  * @param {number|string} int
- * @returns {uint} positive integer 
+ * @return {number} positive integer 
  */
 export function ensureUint(int) {
    int = ensureInteger(int);
@@ -30,7 +30,7 @@ export function ensureUint(int) {
 /**
  * return positive integer or throw TypeError
  * @param {number|string} int 
- * @returns {uint} positive integer 
+ * @return {number} positive integer 
  */
 export function uint(int) {
    return ensureUint(int)
@@ -44,7 +44,7 @@ export function uint(int) {
  * throw TypeError if string can't be converted to integer 
  * 
  * @param {number|string} int 
- * @returns {integer} integer
+ * @return {number} integer
  */
 export function integer(int) {
    return ensureInteger(int)
@@ -57,7 +57,7 @@ export class Integer {
    /**
     * To create Integer Object
     * @param {string|number} v 
-    * @returns 
+    * @return 
     */
    static new(v) {
       v = ensureInteger(v);
@@ -76,7 +76,7 @@ export class Uint {
    /**
     * To create Uint Object
     * @param {string|number} v 
-    * @returns 
+    * @return 
     */
    static new(v) {
       v = ensureUint(v);
