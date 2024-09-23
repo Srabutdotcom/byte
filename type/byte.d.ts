@@ -10,28 +10,28 @@ export class Byte {
              * @param {number} pos - positive integer, represent byteoffset.
              * @return {number} Positive integer value
              */
-            b8: typeof get.getUint8;
+            b8: typeof getUint8;
             /**
              * @method
              * @param {Uint8Array} data
              * @param {number} pos - positive integer, represent byteoffset.
              * @return {number} Positive integer value
              */
-            b16: typeof get.getUint16;
+            b16: typeof getUint16;
             /**
              * @method
              * @param {Uint8Array} data
              * @param {number} pos - positive integer, represent byteoffset.
              * @return {number} Positive integer value
              */
-            b24: typeof get.getUint24;
+            b24: typeof getUint24;
             /**
              * @method
              * @param {Uint8Array} data
              * @param {number} pos - positive integer, represent byteoffset.
              * @return {number} Positive integer value
              */
-            b32: typeof get.getUint32;
+            b32: typeof getUint32;
         };
     };
     static set: {
@@ -42,28 +42,28 @@ export class Byte {
              * @param {1|2|3|4|"1"|"2"|"3"|"4"} bytes
              * @return {Uint8Array}
              */
-            b8: typeof set.Uint8BE;
+            b8: typeof Uint8BE;
             /**
              * convert an integer value to Uint8Array
              * @param {number|string} int
              * @param {1|2|3|4|"1"|"2"|"3"|"4"} bytes
              * @return {Uint8Array}
              */
-            b16: typeof set.Uint16BE;
+            b16: typeof Uint16BE;
             /**
              * convert an integer value to Uint8Array
              * @param {number|string} int
              * @param {1|2|3|4|"1"|"2"|"3"|"4"} bytes
              * @return {Uint8Array}
              */
-            b24: typeof set.Uint24BE;
+            b24: typeof Uint24BE;
             /**
              * convert an integer value to Uint8Array
              * @param {number|string} int
              * @param {1|2|3|4|"1"|"2"|"3"|"4"} bytes
              * @return {Uint8Array}
              */
-            b32: typeof set.Uint32BE;
+            b32: typeof Uint32BE;
         };
     };
     /**
@@ -73,6 +73,6 @@ export class Byte {
      */
     static concat: typeof concat;
 }
-import * as get from "../src/get.js";
-import * as set from "../src/set.js";
+import { getUint8, getUint16, getUint24, getUint32 } from "../src/get.js";
+import { Uint8BE, Uint16BE, Uint24BE, Uint32BE } from "../src/set.js";
 import { concat } from "../src/concat.js";
