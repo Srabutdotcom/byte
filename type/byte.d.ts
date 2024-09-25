@@ -73,6 +73,6 @@ export class Byte {
      */
     static concat: typeof concat;
 }
-import { getUint8, getUint16, getUint24, getUint32 } from "../src/get.js";
-import { Uint8BE, Uint16BE, Uint24BE, Uint32BE } from "../src/set.js";
-import { concat } from "../src/concat.js";
+import type { getUint8, getUint16, getUint24, getUint32 } from "../src/get.js";
+import type { Uint8BE, Uint16BE, Uint24BE, Uint32BE } from "../src/set.js";
+import type { concat } from "../src/concat.js";
