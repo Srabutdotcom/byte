@@ -2,74 +2,39 @@
  * Byte, collection of byte function
  */
 export class Byte {
+    /**
+     * Get value from any byte 8, 16, 24, 32
+     *
+     * @static
+     * @type {{ BE: { b8: getUint8; b16: getUint16; b24: getUint24; b32: getUint32; }; }}
+     */
     static get: {
         BE: {
-            /**
-             * @method
-             * @param {Uint8Array} data
-             * @param {number} pos - positive integer, represent byteoffset.
-             * @return {number} Positive integer value
-             */
             b8: typeof getUint8;
-            /**
-             * @method
-             * @param {Uint8Array} data
-             * @param {number} pos - positive integer, represent byteoffset.
-             * @return {number} Positive integer value
-             */
             b16: typeof getUint16;
-            /**
-             * @method
-             * @param {Uint8Array} data
-             * @param {number} pos - positive integer, represent byteoffset.
-             * @return {number} Positive integer value
-             */
             b24: typeof getUint24;
-            /**
-             * @method
-             * @param {Uint8Array} data
-             * @param {number} pos - positive integer, represent byteoffset.
-             * @return {number} Positive integer value
-             */
             b32: typeof getUint32;
         };
     };
+    /**
+     * convert an integer value to Uint8BE,
+     *
+     * @static
+     * @type {{ BE: { b8: Uint8BE; b16: Uint16BE; b24: Uint24BE; b32: Uint32BE; }; }}
+     */
     static set: {
         BE: {
-            /**
-             * convert an integer value to Uint8Array
-             * @param {number|string} int
-             * @param {1|2|3|4|"1"|"2"|"3"|"4"} bytes
-             * @return {Uint8Array}
-             */
             b8: typeof Uint8BE;
-            /**
-             * convert an integer value to Uint8Array
-             * @param {number|string} int
-             * @param {1|2|3|4|"1"|"2"|"3"|"4"} bytes
-             * @return {Uint8Array}
-             */
             b16: typeof Uint16BE;
-            /**
-             * convert an integer value to Uint8Array
-             * @param {number|string} int
-             * @param {1|2|3|4|"1"|"2"|"3"|"4"} bytes
-             * @return {Uint8Array}
-             */
             b24: typeof Uint24BE;
-            /**
-             * convert an integer value to Uint8Array
-             * @param {number|string} int
-             * @param {1|2|3|4|"1"|"2"|"3"|"4"} bytes
-             * @return {Uint8Array}
-             */
             b32: typeof Uint32BE;
         };
     };
     /**
      * Concate two or more Uint8Array to one Uint8Array
-     * @param  {Uint8Array[]} uint8s [Uint8Array]
-     * @return {Uint8Array} Uint8Array
+     *
+     * @static
+     * @type {concat}
      */
     static concat: typeof concat;
 }
