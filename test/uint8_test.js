@@ -1,5 +1,5 @@
-import { Uint8BE, Uint16BE, Uint24BE, Uint32BE } from "../src/mod.js";
-import { getUint8, getUint16, getUint24, getUint32 } from "../src/mod.js";
+import { Uint8BE, Uint16BE, Uint24BE, Uint32BE } from "../src/mod.ts";
+import { getUint8, getUint16, getUint24, getUint32 } from "../src/mod.ts";
 import { assertEquals } from "@std/assert";
 
 Deno.test("uint8 and its variance test", () => {
