@@ -1,18 +1,18 @@
 /**
- * return integer from string or number.
+ * Converts input to an integer if possible, or throws a TypeError if invalid.
+ * If the input is a float, it will be truncated to an integer.
  *
- * if string contain a floating number then it will be converted to integer
- *
- * throw TypeError if string can't be converted to integer
- *
- * @param {number|string} int
- * @return {number} integer
+ * @param {number|string} int - Input number or string to be converted.
+ * @return {number} - Integer value.
+ * @throws {TypeError} - If the input is not a valid integer.
  */
 export function ensureInteger(int: number | string): number;
 /**
- * return positive integer or throw TypeError
- * @param {number|string} int
- * @return {number} positive integer
+ * Converts input to a positive integer if possible, or throws a TypeError if invalid.
+ *
+ * @param {number|string} int - Input number or string to be converted.
+ * @return {number} - Positive integer.
+ * @throws {TypeError} - If the input is not a positive integer.
  */
 export function ensureUint(int: number | string): number;
 /**
@@ -33,7 +33,7 @@ export function uint(int: number | string): number;
  */
 export function integer(int: number | string): number;
 /**
- * Integer - represent integer value positive or negative
+ * Integer class to encapsulate integer values.
  */
 export class Integer {
     /**
@@ -41,9 +41,13 @@ export class Integer {
      * @param {string|number} v
      * @return
      */
-    static "new"(v: string | number): Integer;
+    static of(v: string | number): Integer;
+    static create: typeof Uint.of;
+    static from: typeof Uint.of;
     constructor(v: any);
     valueOf(): any;
+    toString(): string;
+    get value(): any;
     #private;
 }
 /**
@@ -55,8 +59,12 @@ export class Uint {
      * @param {string|number} v
      * @return
      */
-    static "new"(v: string | number): Uint;
+    static of(v: string | number): Uint;
+    static create: typeof Uint.of;
+    static from: typeof Uint.of;
     constructor(v: any);
     valueOf(): any;
+    toString(): string;
+    get value(): any;
     #private;
 }

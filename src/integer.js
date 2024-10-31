@@ -1,25 +1,24 @@
 //@ts-self-types="../type/get.d.ts"
 /**
- * return integer from string or number.
+ * Converts input to an integer if possible, or throws a TypeError if invalid.
+ * If the input is a float, it will be truncated to an integer.
  * 
- * if string contain a floating number then it will be converted to integer
- * 
- * throw TypeError if string can't be converted to integer 
- * 
- * @param {number|string} int 
- * @return {number} integer
+ * @param {number|string} int - Input number or string to be converted.
+ * @return {number} - Integer value.
+ * @throws {TypeError} - If the input is not a valid integer.
  */
 export function ensureInteger(int) {
-   int = +Number(int).toFixed(0);
-   const pass = Number.isInteger(int)
-   if (!pass) throw TypeError(`expected integer but got ${int}`);
-   return int
+   int = Math.trunc(Number(int));
+   if (!Number.isInteger(int)) throw TypeError(`Expected integer but got ${int}`);
+   return int;
 }
 
 /**
- * return positive integer or throw TypeError
- * @param {number|string} int
- * @return {number} positive integer 
+ * Converts input to a positive integer if possible, or throws a TypeError if invalid.
+ * 
+ * @param {number|string} int - Input number or string to be converted.
+ * @return {number} - Positive integer.
+ * @throws {TypeError} - If the input is not a positive integer.
  */
 export function ensureUint(int) {
    int = ensureInteger(int);
@@ -51,40 +50,48 @@ export function integer(int) {
 }
 
 /**
- * Integer - represent integer value positive or negative
+ * Integer class to encapsulate integer values.
  */
 export class Integer {
+   #value
    /**
     * To create Integer Object
     * @param {string|number} v 
     * @return 
     */
-   static new(v) {
-      v = ensureInteger(v);
-      return new Integer(v);
+   static of(v) {
+      return new Integer(ensureInteger(v));
    }
-   #value
+   static create = Uint.of
+   static from = Uint.of
    constructor(v) {
       this.#value = v
    }
    valueOf() { return this.#value }
+   toString() { return String(this.#value); }
+   get value() { return this.#value; }
 }
 /**
  * Uint - represent positive integer value
  */
 export class Uint {
+   #value
    /**
     * To create Uint Object
     * @param {string|number} v 
     * @return 
     */
-   static new(v) {
-      v = ensureUint(v);
-      return new Uint(v);
+   static of(v) {
+      return new Uint(ensureUint(v));
    }
-   #value
+   static create = Uint.of
+   static from = Uint.of
    constructor(v) {
       this.#value = v
    }
    valueOf() { return this.#value }
+   toString() { return String(this.#value); }
+   get value() { return this.#value; }
 }
+
+// npx -p typescript tsc ./src/integer.js --declaration --allowJs --emitDeclarationOnly --lib ESNext --outDir ./dist
