@@ -60,10 +60,11 @@ export class Integer {
     * @return 
     */
    static of(v) {
-      return new Integer(ensureInteger(v));
+      v= ensureInteger(v)
+      return new Integer(v);
    }
-   static create = Uint.of
-   static from = Uint.of
+   static create(v) { return Uint.of(v)}
+   static from(v) { return Uint.of(v)}
    constructor(v) {
       this.#value = v
    }
@@ -84,8 +85,8 @@ export class Uint {
    static of(v) {
       return new Uint(ensureUint(v));
    }
-   static create = Uint.of
-   static from = Uint.of
+   static create(v) { return Uint.of(v)}
+   static from(v) { return Uint.of(v)}
    constructor(v) {
       this.#value = v
    }

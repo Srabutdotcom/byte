@@ -13,7 +13,7 @@ import { uint } from "./integer.js";
 export function uint8array(data){
    if(data instanceof Uint8Array)return data;
    const encoder = new TextEncoder;
-   if(typeof data == 'string')return enc.encode(data);
+   if(typeof data == 'string')return encoder.encode(data);
    if(typeof data == 'number')return Uint8BE(uint(data))
    if(Array.isArray(data)){
       return concat(data.map(e=>{
@@ -22,7 +22,7 @@ export function uint8array(data){
             return Uint8BE(uint(e))
          }
          if(typeof e == 'string'){
-            return enc.encode(e)
+            return encoder.encode(e)
          } 
          if(Object.hasOwn(e, 'toString')){
             return enc.encode(e.toString())
