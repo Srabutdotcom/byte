@@ -29,3 +29,11 @@ Deno.test(
       assertEquals(actual, expected)
    }
 )
+
+Deno.test(
+   "undefined data",
+   ()=>{
+      const actual = uint8array();
+      assertEquals(actual, new Uint8Array)
+   }
+)

@@ -1,7 +1,7 @@
 //@ts-self-types="../type/uint8array.d.ts"
 import { concat } from "./concat.js";
 import { Uint8BE } from "./set.js";
-import { uint } from "./integer.js";
+
 /**
  * Converts input to a Uint8Array.
  * Supports Uint8Array, string, number, or an array of these types.
@@ -11,15 +11,16 @@ import { uint } from "./integer.js";
  * @throws {TypeError} - If data cannot be converted to Uint8Array.
  */
 export function uint8array(data){
+   if(!data)return new Uint8Array
    if(data instanceof Uint8Array)return data;
    const encoder = new TextEncoder;
    if(typeof data == 'string')return encoder.encode(data);
-   if(typeof data == 'number')return Uint8BE(uint(data))
+   if(typeof data == 'number')return Uint8BE(data)
    if(Array.isArray(data)){
       return concat(data.map(e=>{
          if(e instanceof Uint8Array) return e
          if(typeof e =='number'){
-            return Uint8BE(uint(e))
+            return Uint8BE(e)
          }
          if(typeof e == 'string'){
             return encoder.encode(e)
