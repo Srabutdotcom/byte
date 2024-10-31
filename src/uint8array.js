@@ -17,7 +17,7 @@ export function uint8array(data){
    if(typeof data == 'string')return encoder.encode(data);
    if(typeof data == 'number')return Uint8BE(data)
    if(Array.isArray(data)){
-      return concat(data.map(e=>{
+      return concat(...data.map(e=>{
          if(e instanceof Uint8Array) return e
          if(typeof e =='number'){
             return Uint8BE(e)
