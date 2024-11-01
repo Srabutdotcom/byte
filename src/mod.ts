@@ -5,6 +5,7 @@ export * from './set.js';
 export * from './get.js'
 export * from './uint8array.js';
 export * from "./byte.js"
+export * from "./uint.js";
 
 //`esbuild ./mod.js --bundle --format=esm --target=esnext --outfile=../dist/bytes.js --legal-comments=inline`
 //--external:npm:jose* --external:npm:@lapo/*
