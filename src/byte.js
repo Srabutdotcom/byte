@@ -23,7 +23,7 @@ export class Byte extends Uint8Array {
       args[0] = _final.buffer
       return args
    }
-   static from(value){
+   static create(value){
       return new Byte(value)
    }
    constructor(...args) {
