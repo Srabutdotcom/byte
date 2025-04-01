@@ -13,6 +13,12 @@ export class Byte extends Uint8Array {
      * Creates a new `Byte` instance.
      * @param {ArrayBuffer | Uint8Array | string} value - The initial value.
      */
+    static create(value?: ArrayBuffer | Uint8Array | string):Byte
+
+    /**
+     * Creates a new `Byte` instance.
+     * @param {ArrayBuffer | Uint8Array | string} value - The initial value.
+     */
     constructor(value?: ArrayBuffer | Uint8Array | string);
 
     /**

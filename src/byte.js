@@ -23,7 +23,9 @@ export class Byte extends Uint8Array {
       args[0] = _final.buffer
       return args
    }
-
+   static from(value){
+      return new Byte(value)
+   }
    constructor(...args) {
       args = Byte.sanitize(args)
       super(...args);
