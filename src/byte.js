@@ -1,50 +1,59 @@
 //@ts-self-types="../type/byte.d.ts"
-import { concat } from "./concat.js";
-import { getUint8, getUint16, getUint24, getUint32 } from "./get.js";
-import { Uint8BE, Uint16BE, Uint24BE, Uint32BE } from "./set.js";
+import { Convert } from "pvtsutils"
 
-/**
- * Byte, collection of byte function
- */
-export class Byte {
-   
-   /**
-    * Get value from any byte 8, 16, 24, 32
-    *
-    * @static
-    * @type {{ BE: { b8: getUint8; b16: getUint16; b24: getUint24; b32: getUint32; }; }}
-    */
-   static get = {    
-      BE: {
-         b8: getUint8,
-         b16: getUint16,
-         b24: getUint24,
-         b32: getUint32,
+const encoder = new TextEncoder
+
+export class Byte extends Uint8Array {
+   static sanitize(args) {
+      const _0 = args[0]
+      let _init;
+
+      if (typeof (_0) !== "string") return args
+      if (Convert.isHex(_0)) {
+         _init = new Uint8Array(Convert.FromHex(_0));
+      } else if (Convert.isBase64(_0)) {
+         _init = new Uint8Array(Convert.FromBase64(_0));
+      } else if (Convert.isBase64Url(_0)) {
+         _init = new Uint8Array(Convert.FromBase64Url(_0));
+      } else {
+         _init = new Uint8Array(encoder.encode(_0))
       }
+      const _final = new Uint8Array(new ArrayBuffer(_init.length, { maxByteLength: 8192 }));
+      _final.set(_init)
+      args[0] = _final.buffer
+      return args
    }
-   
-   /**
-    * convert an integer value to Uint8BE, 
-    *
-    * @static
-    * @type {{ BE: { b8: Uint8BE; b16: Uint16BE; b24: Uint24BE; b32: Uint32BE; }; }}
-    */
-   static set = {
-      BE: {
-         b8: Uint8BE,
-         b16: Uint16BE,
-         b24: Uint24BE,
-         b32: Uint32BE,
-      }
+
+   constructor(...args) {
+      args = Byte.sanitize(args)
+      super(...args);
+      const _null = null;
    }
-   /**
-    * Concate two or more Uint8Array to one Uint8Array
-    *
-    * @static
-    * @type {concat}
-    */
-   static concat = concat
+
+   append(array) {
+      array = new Byte(array);
+      const _initLength = this.length;
+      const length = this.length + array.length;
+      this.buffer.resize(length)
+      this.set(array, _initLength);
+   }
+   prepend(array) {
+      array = new Byte(array);
+      const _initLength = this.length;
+      const length = this.length + array.length;
+      this.buffer.resize(length)
+      this.set(this.slice(0, _initLength), array.length);
+      this.set(array, 0)
+   }
+   insert(array, index) {
+      array = new Byte(array);
+      const _initLength = this.length;
+      const length = this.length + array.length;
+      this.buffer.resize(length);
+      const copy = this.slice(index, _initLength);
+      this.set(array, index);
+      this.set(copy, index + array.length)
+   }
 }
 
-//npx -p typescript tsc ./src/byte.js --declaration --allowJs --emitDeclarationOnly --lib ESNext --outDir ./dist
 

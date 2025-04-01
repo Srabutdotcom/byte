@@ -1,43 +1,41 @@
 /**
- * Byte, collection of byte function
+ * A `Byte` class that extends `Uint8Array` with additional capabilities such as string conversion and resizable buffer.
  */
-export class Byte {
+export class Byte extends Uint8Array {
     /**
-     * Get value from any byte 8, 16, 24, 32
-     *
-     * @static
-     * @type {{ BE: { b8: getUint8; b16: getUint16; b24: getUint24; b32: getUint32; }; }}
+     * Converts different string formats (hex, base64, base64url) into a `Uint8Array`
+     * @param {any[]} args - The input arguments.
+     * @returns {any[]} Sanitized arguments suitable for constructing a `Byte` instance.
      */
-    static get: {
-        BE: {
-            b8: typeof getUint8;
-            b16: typeof getUint16;
-            b24: typeof getUint24;
-            b32: typeof getUint32;
-        };
-    };
+    static sanitize(args: any[]): any[];
+
     /**
-     * convert an integer value to Uint8BE,
-     *
-     * @static
-     * @type {{ BE: { b8: Uint8BE; b16: Uint16BE; b24: Uint24BE; b32: Uint32BE; }; }}
+     * Creates a new `Byte` instance.
+     * @param {ArrayBuffer | Uint8Array | string} value - The initial value.
      */
-    static set: {
-        BE: {
-            b8: typeof Uint8BE;
-            b16: typeof Uint16BE;
-            b24: typeof Uint24BE;
-            b32: typeof Uint32BE;
-        };
-    };
+    constructor(value?: ArrayBuffer | Uint8Array | string);
+
     /**
-     * Concate two or more Uint8Array to one Uint8Array
-     *
-     * @static
-     * @type {concat}
+     * Appends data to the end of the Byte array.
+     * @param {ArrayBuffer | Uint8Array | string} array - The data to append.
+     * @returns {Byte} A new Byte instance with the appended data.
      */
-    static concat: typeof concat;
+    append(array: ArrayBuffer | Uint8Array | string): Byte;
+
+    /**
+     * Prepends data to the beginning of the Byte array.
+     * @param {ArrayBuffer | Uint8Array | string} array - The data to prepend.
+     * @returns {Byte} A new Byte instance with the prepended data.
+     */
+    prepend(array: ArrayBuffer | Uint8Array | string): Byte;
+
+    /**
+     * Inserts data at a specified index in the Byte array.
+     * @param {ArrayBuffer | Uint8Array | string} array - The data to insert.
+     * @param {number} index - The index at which to insert the data.
+     * @returns {Byte} A new Byte instance with the inserted data.
+     */
+    insert(array: ArrayBuffer | Uint8Array | string, index: number): Byte;
 }
-import type { getUint8, getUint16, getUint24, getUint32 } from "../src/get.js";
-import type { Uint8BE, Uint16BE, Uint24BE, Uint32BE } from "../src/set.js";
-import type { concat } from "../src/concat.js";
+
+
