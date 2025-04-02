@@ -12,4 +12,5 @@ console.log("toHex ", test.toHex())
 
 const ca1 = Byte.create([0x30, 0x82, 0x01, 0x0a]); // Example DN
 //const ca2 = Byte.create([0x30, 0x81, 0xfa]);       // Another example DN
+const ca2 = Byte.create();
 const _null = null;

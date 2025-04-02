@@ -5,7 +5,7 @@ const encoder = new TextEncoder
 
 export class Byte extends Uint8Array {
    static sanitize(args) {
-      if (!args.length) {
+      if (!args.length || !args[0]) {
          // If no args provided, return a default resizable ArrayBuffer
          return [new ArrayBuffer(0, { maxByteLength: 8192 })];
       }
