@@ -8,22 +8,29 @@ export class Byte extends Uint8Array {
       const _0 = args[0]
       let _init;
 
-      if (typeof (_0) !== "string") return args
-      if (Convert.isHex(_0)) {
-         _init = new Uint8Array(Convert.FromHex(_0));
-      } else if (Convert.isBase64(_0)) {
-         _init = new Uint8Array(Convert.FromBase64(_0));
-      } else if (Convert.isBase64Url(_0)) {
-         _init = new Uint8Array(Convert.FromBase64Url(_0));
+      if (typeof (_0) == "string") {
+         if (Convert.isHex(_0)) {
+            _init = new Uint8Array(Convert.FromHex(_0));
+         } else if (Convert.isBase64(_0)) {
+            _init = new Uint8Array(Convert.FromBase64(_0));
+         } else if (Convert.isBase64Url(_0)) {
+            _init = new Uint8Array(Convert.FromBase64Url(_0));
+         } else {
+            _init = new Uint8Array(encoder.encode(_0))
+         }
+      } else if (_0 instanceof Uint8Array || Array.isArray(_0)) {
+         _init = new Uint8Array(_0); // Directly convert to Uint8Array
       } else {
-         _init = new Uint8Array(encoder.encode(_0))
+         return args
       }
+      // Initialize resizable buffer after _init is determined
       const _final = new Uint8Array(new ArrayBuffer(_init.length, { maxByteLength: 8192 }));
-      _final.set(_init)
-      args[0] = _final.buffer
-      return args
+      _final.set(_init);
+
+      args[0] = _final.buffer;
+      return args;
    }
-   static create(value){
+   static create(value) {
       return new Byte(value)
    }
    constructor(...args) {
@@ -57,18 +64,18 @@ export class Byte extends Uint8Array {
       this.set(copy, index + array.length)
    }
 
-   toBase64(){
+   toBase64() {
       return Convert.ToBase64(this)
    }
 
-   toBase64Url(){
+   toBase64Url() {
       return Convert.ToBase64Url(this)
    }
 
-   toHex(){
+   toHex() {
       return Convert.ToHex(this)
    }
-   
+
 }
 
 
