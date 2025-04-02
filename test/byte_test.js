@@ -6,3 +6,7 @@ test.append(Uint8Array.of(1, 2, 3));
 test.prepend(Uint8Array.of(5, 6, 9));
 test.insert(Uint8Array.of(100), 5)
 
+console.log("toBase64 ", test.toBase64())
+console.log("toBase64Url ", test.toBase64Url())
+console.log("toHex ", test.toHex())
+

@@ -56,6 +56,20 @@ export class Byte extends Uint8Array {
       this.set(array, index);
       this.set(copy, index + array.length)
    }
+
+   toBase64(){
+      return Convert.ToBase64(this)
+   }
+
+   toBase64Url(){
+      return Convert.ToBase64Url(this)
+   }
+
+   toHex(){
+      return Convert.ToHex(this)
+   }
+   
 }
+
 
 

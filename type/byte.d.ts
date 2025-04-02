@@ -42,6 +42,21 @@ export class Byte extends Uint8Array {
      * @returns {Byte} A new Byte instance with the inserted data.
      */
     insert(array: ArrayBuffer | Uint8Array | string, index: number): Byte;
+
+    /**
+     * Convert byte to Base64 String
+     */
+    toBase64(): string;
+
+    /**
+     * Convert byte to Base64Url String
+     */
+    toBase64Url(): string;
+
+    /**
+     * Convert byte to Hex String
+     */
+    toHex(): string;
 }
 
 

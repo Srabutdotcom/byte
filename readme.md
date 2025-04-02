@@ -47,6 +47,14 @@ byteArray.insert("l", 2); // Insert 'l' at index 2
 console.log(new TextDecoder().decode(byteArray)); // Output: "Hello"
 ```
 
+### Convert to various string 
+```javascript
+const byteArray = new Byte("Helo");
+byteArray.toBase64(); // Convert to Base64
+byteArray.toBase64Url(); // Convert to Base64Url
+byteArray.toHex(); // Convert to Hex
+```
+
 ## API Reference
 
 ### `static sanitize(args: any[]): any[]`
