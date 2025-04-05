@@ -197,7 +197,7 @@ function arraying(value) {
    }
 
    if (typeof value === 'string') {
-      return new TextEncoder().encode(str);
+      return new TextEncoder().encode(value);
    }
 
    if (value === undefined || value === null || value === false) {
