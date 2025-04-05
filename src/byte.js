@@ -1,86 +1,234 @@
 //@ts-self-types="../type/byte.d.ts"
 import { Convert } from "pvtsutils"
 
-const encoder = new TextEncoder
+export class Byte {
+   #_view
 
-export class Byte extends Uint8Array {
-   static sanitize(args) {
-      if (!args.length || !args[0]) {
-         // If no args provided, return a default resizable ArrayBuffer
-         return [new ArrayBuffer(0, { maxByteLength: 8192 })];
-      }
-
-      const _0 = args[0]
-      let _init;
-
-      if (typeof (_0) == "string") {
-         if (Convert.isHex(_0)) {
-            _init = new Uint8Array(Convert.FromHex(_0));
-         } else if (Convert.isBase64(_0)) {
-            _init = new Uint8Array(Convert.FromBase64(_0));
-         } else if (Convert.isBase64Url(_0)) {
-            _init = new Uint8Array(Convert.FromBase64Url(_0));
-         } else {
-            _init = new Uint8Array(encoder.encode(_0))
-         }
-      } else if (_0 instanceof Uint8Array || Array.isArray(_0)) {
-         _init = new Uint8Array(_0); // Directly convert to Uint8Array
+   static create(array) { 
+      array = arraying(array)
+      return new Byte(array) 
+   }
+   constructor(initialData) {
+      if (initialData instanceof ArrayBuffer) {
+         this.#_view = new Uint8Array(initialData);
+      } else if (Array.isArray(initialData) || initialData instanceof Uint8Array) {
+         this.#_view = new Uint8Array(initialData);
+      } else if (typeof initialData === 'number') {
+         this.#_view = new Uint8Array(initialData);
       } else {
-         return args
+         this.#_view = new Uint8Array(0); // Default to empty
       }
-      // Initialize resizable buffer after _init is determined
-      const _final = new Uint8Array(new ArrayBuffer(_init.length, { maxByteLength: 8192 }));
-      _final.set(_init);
+   }
 
-      args[0] = _final.buffer;
-      return args;
+   get length() {
+      return this.#_view.length;
    }
-   static create(value) {
-      return new Byte(value)
+
+   get buffer() {
+      return this.#_view.buffer;
    }
-   constructor(...args) {
-      args = Byte.sanitize(args)
-      super(...args);
-      const _null = null;
+
+   get byteOffset() {
+      return this.#_view.byteOffset;
    }
+
+   get byteLength() {
+      return this.#_view.byteLength;
+   }
+
+   get [Symbol.toStringTag](){
+      return "Uint8Array"
+   }
+
+   get view(){ return this.#_view }
 
    append(array) {
-      array = new Byte(array);
-      const _initLength = this.length;
-      const length = this.length + array.length;
-      this.buffer.resize(length)
-      this.set(array, _initLength);
+      array = arraying(array)
+      const copy = this.#_view.slice();
+      this.#_view = new Uint8Array(array.length + copy.length);
+      this.#_view.set(copy);
+      this.#_view.set(array, copy.length);
    }
+
    prepend(array) {
-      array = new Byte(array);
-      const _initLength = this.length;
-      const length = this.length + array.length;
-      this.buffer.resize(length)
-      this.set(this.slice(0, _initLength), array.length);
-      this.set(array, 0)
+      array = arraying(array)
+      const copy = this.#_view.slice();
+      this.#_view = new Uint8Array(array.length + copy.length);
+      this.#_view.set(array);
+      this.#_view.set(copy, array.length);
    }
+
    insert(array, index) {
-      array = new Byte(array);
-      const _initLength = this.length;
-      const length = this.length + array.length;
-      this.buffer.resize(length);
-      const copy = this.slice(index, _initLength);
-      this.set(array, index);
-      this.set(copy, index + array.length)
+      array = arraying(array)
+      const first = this.#_view.slice(0, index);
+      const last = this.#_view.slice(index);
+      this.#_view = new Uint8Array(array.length + first.length + last.length);
+      this.#_view.set(first);
+      this.#_view.set(array, index);
+      this.#_view.set(last, first.length + array.length);
    }
 
    toBase64() {
-      return Convert.ToBase64(this)
+      return Convert.ToBase64(this.#_view)
    }
 
    toBase64Url() {
-      return Convert.ToBase64Url(this)
+      return Convert.ToBase64Url(this.#_view)
    }
 
    toHex() {
-      return Convert.ToHex(this)
+      return Convert.ToHex(this.#_view)
    }
 
+   subarray(begin = 0, end = this.length) {
+      return new Byte(this.#_view.subarray(begin, end));
+   }
+
+   set(array, offset = 0) {
+      this.#_view.set(array, offset);
+   }
+
+   slice(begin = 0, end = this.length) {
+      return new Byte(this.#_view.slice(begin, end));
+   }
+
+   copyWithin(target, start, end = this.length) {
+      this.#_view.copyWithin(target, start, end);
+      return this;
+   }
+
+   fill(value, start = 0, end = this.length) {
+      this.#_view.fill(value, start, end);
+      return this;
+   }
+
+   indexOf(searchValue, fromIndex = 0) {
+      return this.#_view.indexOf(searchValue, fromIndex);
+   }
+
+   lastIndexOf(searchValue, fromIndex = this.length - 1) {
+      return this.#_view.lastIndexOf(searchValue, fromIndex);
+   }
+
+   every(callback, thisArg) {
+      return this.#_view.every(callback, thisArg);
+   }
+
+   some(callback, thisArg) {
+      return this.#_view.some(callback, thisArg);
+   }
+
+   forEach(callback, thisArg) {
+      this.#_view.forEach(callback, thisArg);
+   }
+
+   map(callback, thisArg) {
+      return new Byte(this.#_view.map(callback, thisArg));
+   }
+
+   filter(callback, thisArg) {
+      return new Byte(this.#_view.filter(callback, thisArg));
+   }
+
+   reduce(callback, initialValue) {
+      return this.#_view.reduce(callback, initialValue);
+   }
+
+   reduceRight(callback, initialValue) {
+      return this.#_view.reduceRight(callback, initialValue);
+   }
+
+   reverse() {
+      this.#_view.reverse();
+      return this;
+   }
+
+   sort(compareFunction) {
+      this.#_view.sort(compareFunction);
+      return this;
+   }
+
+   toString() {
+      return `Byte [${Array.from(this.#_view).join(', ')}]`;
+   }
+
+   toLocaleString() {
+      return this.#_view.toLocaleString();
+   }
+
+   [Symbol.iterator]() {
+      return this.#_view[Symbol.iterator]();
+   }
+
+   entries() {
+      return this.#_view.entries();
+   }
+
+   keys() {
+      return this.#_view.keys();
+   }
+
+   values() {
+      return this.#_view.values();
+   }
+
+   // Add more Uint8Array methods as needed...
+}
+
+function arraying(value) {
+   if (value instanceof Uint8Array || Array.isArray(value)) {
+     return value;
+   }
+ 
+   if (typeof value === 'string') {
+     return encoding(value);
+   }
+
+   if (value === undefined || value === null || value === false) {
+      return [];
+   }
+
+   if (Number.isInteger(value) && value >= 0) {
+      return new Uint8Array(value);
+   }
+ 
+   throw new TypeError('Value must be a Uint8Array, Array, or string.');
+ }
+
+function detectEncoding(str) {
+   if (!str || typeof str !== "string") return "utf8";
+
+   const hex = Convert.isHex(str);
+   const base64 = Convert.isBase64(str);
+   const base64url = Convert.isBase64Url(str);
+
+   // Prioritize hex if it's clearly only hex
+   if (hex && !base64 && !base64url) return "hex";
+
+   // Prioritize base64url over base64
+   if (base64url && !base64) return "base64url";
+
+   // Prefer hex if valid hex and length is long enough
+   if (hex) return "hex";
+
+   if (base64) return "base64";
+   if (base64url) return "base64url";
+
+   return "utf8";
+}
+
+function encoding(str) {
+   const type = detectEncoding(str);
+   try {
+      switch (type) {
+         case "hex": return new Uint8Array(Convert.FromHex(str));
+         case "base64": return new Uint8Array(Convert.FromBase64(str));
+         case "base64url": return new Uint8Array(Convert.FromBase64Url(str));
+         default: return new TextEncoder().encode(str);
+      }
+   } catch {
+      return new TextEncoder().encode(str);
+   }
 }
 
 
