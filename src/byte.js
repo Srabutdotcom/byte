@@ -4,9 +4,21 @@ import { Convert } from "pvtsutils"
 export class Byte {
    #_view
 
-   static create(array) { 
+   static create(array) {
       array = arraying(array)
-      return new Byte(array) 
+      return new Byte(array)
+   }
+   static fromHex(hexStr) {
+      if (Convert.isHex(hexStr) == false) throw new TypeError(`Expected HexaDecimal String`);
+      return new Byte(Convert.FromHex(hexStr));
+   }
+   static fromBase64(base64Str) {
+      if (Convert.isBase64(base64Str) == false) throw new TypeError(`Expected Base64 String`);
+      return new Byte(Convert.FromBase64(base64Str));
+   }
+   static fromBase64Url(base64UrlStr) {
+      if (Convert.isBase64Url(base64UrlStr) == false) throw new TypeError(`Expected Base64 String`);
+      return new Byte(Convert.FromBase64Url(base64UrlStr));
    }
    constructor(initialData) {
       if (initialData instanceof ArrayBuffer) {
@@ -36,11 +48,11 @@ export class Byte {
       return this.#_view.byteLength;
    }
 
-   get [Symbol.toStringTag](){
+   get [Symbol.toStringTag]() {
       return "Uint8Array"
    }
 
-   get view(){ return this.#_view }
+   get view() { return this.#_view }
 
    append(array) {
       array = arraying(array)
@@ -80,7 +92,7 @@ export class Byte {
       return Convert.ToHex(this.#_view)
    }
 
-   toUtf8String(){
+   toUtf8String() {
       return Convert.ToUtf8String(this.#_view)
    }
 
@@ -181,11 +193,11 @@ export class Byte {
 
 function arraying(value) {
    if (value instanceof Uint8Array || Array.isArray(value)) {
-     return value;
+      return value;
    }
- 
+
    if (typeof value === 'string') {
-     return encoding(value);
+      return new TextEncoder().encode(str);
    }
 
    if (value === undefined || value === null || value === false) {
@@ -195,44 +207,8 @@ function arraying(value) {
    if (Number.isInteger(value) && value >= 0) {
       return new Uint8Array(value);
    }
- 
+
    throw new TypeError('Value must be a Uint8Array, Array, or string.');
- }
-
-function detectEncoding(str) {
-   if (!str || typeof str !== "string") return "utf8";
-
-   const hex = Convert.isHex(str);
-   const base64 = Convert.isBase64(str);
-   const base64url = Convert.isBase64Url(str);
-
-   // Prioritize hex if it's clearly only hex
-   if (hex && !base64 && !base64url) return "hex";
-
-   // Prioritize base64url over base64
-   if (base64url && !base64) return "base64url";
-
-   // Prefer hex if valid hex and length is long enough
-   if (hex) return "hex";
-
-   if (base64) return "base64";
-   if (base64url) return "base64url";
-
-   return "utf8";
-}
-
-function encoding(str) {
-   const type = detectEncoding(str);
-   try {
-      switch (type) {
-         case "hex": return new Uint8Array(Convert.FromHex(str));
-         case "base64": return new Uint8Array(Convert.FromBase64(str));
-         case "base64url": return new Uint8Array(Convert.FromBase64Url(str));
-         default: return new TextEncoder().encode(str);
-      }
-   } catch {
-      return new TextEncoder().encode(str);
-   }
 }
 
 

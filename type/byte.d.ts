@@ -26,6 +26,33 @@ export class Byte {
   static create(array: any): Byte;
 
   /**
+     * Creates a new Byte instance from a hexadecimal string.
+     *
+     * @param {string} hexStr - The hexadecimal string to convert.
+     * @returns {Byte} - A new Byte instance.
+     * @throws {TypeError} - If the input string is not a valid hexadecimal string.
+     */
+  static fromHex(hexStr: string): Byte;
+
+  /**
+   * Creates a new Byte instance from a Base64 string.
+   *
+   * @param {string} base64Str - The Base64 string to convert.
+   * @returns {Byte} - A new Byte instance.
+   * @throws {TypeError} - If the input string is not a valid Base64 string.
+   */
+  static fromBase64(base64Str: string): Byte;
+
+  /**
+   * Creates a new Byte instance from a Base64URL string.
+   *
+   * @param {string} base64UrlStr - The Base64URL string to convert.
+   * @returns {Byte} - A new Byte instance.
+   * @throws {TypeError} - If the input string is not a valid Base64URL string.
+   */
+  static fromBase64Url(base64UrlStr: string): Byte;
+
+  /**
    * Creates a new Byte instance.
    *
    * @param {ArrayBuffer | Array<number> | Uint8Array | number} initialData - The initial data for the Byte instance.
