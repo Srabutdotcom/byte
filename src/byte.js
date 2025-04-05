@@ -196,6 +196,8 @@ function arraying(value) {
       return value;
    }
 
+   if (value instanceof Byte) return value.view;
+
    if (typeof value === 'string') {
       return new TextEncoder().encode(value);
    }
