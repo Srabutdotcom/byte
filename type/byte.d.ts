@@ -118,6 +118,13 @@ export class Byte {
   toHex(): string;
 
   /**
+   * Converts the Byte instance to a utf8 string.
+   *
+   * @returns {string} - The utf8 string representation of the Byte instance.
+   */
+  toUtf8String(): string;
+
+  /**
    * Returns a new Byte instance containing a subarray of the current Byte instance.
    *
    * @param {number} [begin=0] - The beginning index of the subarray.

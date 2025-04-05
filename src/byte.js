@@ -80,6 +80,10 @@ export class Byte {
       return Convert.ToHex(this.#_view)
    }
 
+   toUtf8String(){
+      return Convert.ToUtf8String(this.#_view)
+   }
+
    subarray(begin = 0, end = this.length) {
       return new Byte(this.#_view.subarray(begin, end));
    }
