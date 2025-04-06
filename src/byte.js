@@ -1,35 +1,51 @@
 //@ts-self-types="../type/byte.d.ts"
 import { Convert } from "pvtsutils"
 
+const encoder = new TextEncoder();
+
 export class Byte {
    #_view
+   #_buffer;
+   #_length = 0;
 
    static create(array) {
-      array = arraying(array)
       return new Byte(array)
    }
    static fromHex(hexStr) {
-      if (Convert.isHex(hexStr) == false) throw new TypeError(`Expected HexaDecimal String`);
+      if (!Convert.isHex(hexStr)) throw new TypeError(`Expected HexaDecimal String`);
       return new Byte(Convert.FromHex(hexStr));
    }
+
    static fromBase64(base64Str) {
-      if (Convert.isBase64(base64Str) == false) throw new TypeError(`Expected Base64 String`);
+      if (!Convert.isBase64(base64Str)) throw new TypeError(`Expected Base64 String`);
       return new Byte(Convert.FromBase64(base64Str));
    }
+
    static fromBase64Url(base64UrlStr) {
-      if (Convert.isBase64Url(base64UrlStr) == false) throw new TypeError(`Expected Base64 String`);
+      if (!Convert.isBase64Url(base64UrlStr)) throw new TypeError(`Expected Base64 String`);
       return new Byte(Convert.FromBase64Url(base64UrlStr));
    }
+
    constructor(initialData) {
-      if (initialData instanceof ArrayBuffer) {
-         this.#_view = new Uint8Array(initialData);
-      } else if (Array.isArray(initialData) || initialData instanceof Uint8Array) {
-         this.#_view = new Uint8Array(initialData);
-      } else if (typeof initialData === 'number') {
-         this.#_view = new Uint8Array(initialData);
-      } else {
-         this.#_view = new Uint8Array(0); // Default to empty
-      }
+      const init = arraying(initialData);
+      const capacity = Math.max(64, init.length * 2);
+      this.#_buffer = new Uint8Array(capacity);
+      this.#_buffer.set(init);
+      this.#_length = init.length;
+      this.#_view = this.#_buffer.subarray(0, this.#_length);
+   }
+
+   #ensureCapacity(additional) {
+      const required = this.#_length + additional;
+      if (required <= this.#_buffer.length) return;
+
+      let newCapacity = this.#_buffer.length * 2;
+      while (newCapacity < required) newCapacity *= 2;
+
+      const newBuffer = new Uint8Array(newCapacity);
+      newBuffer.set(this.#_view);
+      this.#_buffer = newBuffer;
+      this.#_view = this.#_buffer.subarray(0, this.#_length);
    }
 
    get length() {
@@ -56,28 +72,30 @@ export class Byte {
 
    append(array) {
       array = arraying(array)
-      const copy = this.#_view.slice();
-      this.#_view = new Uint8Array(array.length + copy.length);
-      this.#_view.set(copy);
-      this.#_view.set(array, copy.length);
+      this.#ensureCapacity(array.length);
+      this.#_buffer.set(array, this.#_length);
+      this.#_length += array.length;
+      this.#_view = this.#_buffer.subarray(0, this.#_length);
    }
 
    prepend(array) {
-      array = arraying(array)
-      const copy = this.#_view.slice();
-      this.#_view = new Uint8Array(array.length + copy.length);
-      this.#_view.set(array);
-      this.#_view.set(copy, array.length);
+      array = arraying(array);
+      const total = this.#_length + array.length;
+      this.#ensureCapacity(array.length);
+      this.#_buffer.copyWithin(array.length, 0, this.#_length);
+      this.#_buffer.set(array, 0);
+      this.#_length = total;
+      this.#_view = this.#_buffer.subarray(0, this.#_length);
    }
 
    insert(array, index) {
-      array = arraying(array)
-      const first = this.#_view.slice(0, index);
-      const last = this.#_view.slice(index);
-      this.#_view = new Uint8Array(array.length + first.length + last.length);
-      this.#_view.set(first);
-      this.#_view.set(array, index);
-      this.#_view.set(last, first.length + array.length);
+      array = arraying(array);
+      if (index < 0 || index > this.#_length) throw new RangeError("Index out of range");
+      this.#ensureCapacity(array.length);
+      this.#_buffer.copyWithin(index + array.length, index, this.#_length);
+      this.#_buffer.set(array, index);
+      this.#_length += array.length;
+      this.#_view = this.#_buffer.subarray(0, this.#_length);
    }
 
    toBase64() {
@@ -192,24 +210,11 @@ export class Byte {
 }
 
 function arraying(value) {
-   if (value instanceof Uint8Array || Array.isArray(value)) {
-      return value;
-   }
-
+   if (value instanceof Uint8Array || Array.isArray(value)) return value;
    if (value instanceof Byte) return value.view;
-
-   if (typeof value === 'string') {
-      return new TextEncoder().encode(value);
-   }
-
-   if (value === undefined || value === null || value === false) {
-      return [];
-   }
-
-   if (Number.isInteger(value) && value >= 0) {
-      return new Uint8Array(value);
-   }
-
+   if (typeof value === 'string') return encoder.encode(value);
+   if (value == null || value === false) return new Uint8Array();
+   if (Number.isInteger(value) && value >= 0) return new Uint8Array(value);
    throw new TypeError('Value must be a Uint8Array, Array, or string.');
 }
 
