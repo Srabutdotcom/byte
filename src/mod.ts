@@ -1,3 +1,3 @@
-//@ts-self-types="../type/mod.d.ts"
 export * from "./byte.js"
+export * from "./sanitizer.js"
 
