@@ -10,5 +10,6 @@ assertThrows(()=>{
    const sanitize_2 = sanitize([data_2], {start : 0, startLength : 2, minLength : 4, maxLength : 2 ** 16 - 1, trace : true});
 }, RangeError)
 
+const sanitize_3 = sanitize(["hello"], {start:0, trace:true})
 
 const _null = null;
