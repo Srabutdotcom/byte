@@ -56,10 +56,10 @@ export function sanitize(args, option = { start: 0, startLength: undefined, minL
       console.trace({ "arraying string": a0 })
    }
 
-   if(startLength === undefined){
+   if (startLength === undefined) {
       args[0] = a0.subarray(start);
-      console.trace({"returning all":args[0]})
-      return 
+      console.trace({ "returning all": args[0] })
+      return
    }
 
    if (a0.length < minLength) {
@@ -84,11 +84,10 @@ export function sanitize(args, option = { start: 0, startLength: undefined, minL
       throw new RangeError(`Length ${lengthOf} exceeds maximum size ${maxLength}`);
    }
 
-   const end = startLength + lengthOf;
+   const end = startLength + lengthBytes + lengthOf;
 
-   const lengthofData = a0.length - start - lengthBytes;
-   if (lengthofData < end) {
-      throw new RangeError(`Input too short. Expected at least ${end} bytes but got ${lengthofData}`);
+   if (a0.length < end) {
+      throw new RangeError(`Input too short. Expected at least ${end}`);
    }
 
    args[0] = a0.subarray(start, end);
