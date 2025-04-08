@@ -1,3 +1,4 @@
+//@ts-self-types="../type/vector.d.ts"
 import { arraying } from "./byte.js";
 import { unity } from "./unity.js";
 
