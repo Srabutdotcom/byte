@@ -209,14 +209,20 @@ export class Byte {
    // Add more Uint8Array methods as needed...
 }
 
-function arraying(value) {
+export function arraying(value) {
    if (value instanceof Uint8Array || Array.isArray(value)) return value;
    if (value instanceof Byte) return value.view;
    if (typeof value === 'string') return encoder.encode(value);
    if (value == null || value === false) return new Uint8Array();
-   if (Number.isInteger(value) && value >= 0) return new Uint8Array(value);
+   if (isByte(value)) return new Uint8Array(value);
    throw new TypeError('Value must be a Uint8Array, Array, or string.');
 }
 
-
+function isByte(v) {
+   return (
+      Number.isInteger(v) &&
+      v >= 0 &&
+      v <= 255
+   )
+}
 

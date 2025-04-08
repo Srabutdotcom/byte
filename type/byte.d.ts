@@ -5,7 +5,7 @@
  * @returns {Uint8Array | Array<number>} - The Uint8Array or Array<number> representation of the input.
  * @throws {TypeError} - If the input is not a Uint8Array, Array, positive integer, or string.
  */
-declare function arraying(value: any): Uint8Array | number[];
+export declare function arraying(value: any): Uint8Array | number[];
 
 /**
  * A class that mimics the methods and behavior of Uint8Array.
