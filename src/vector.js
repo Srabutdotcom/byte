@@ -38,7 +38,7 @@ function vector32(array) {
    return unity(b3(length), b2(length), b1(length), b0(length), array);
 }
 
-var b0 = (length) => length & 0xFF;
-var b1 = (length) => length < 256 ? 0 : (length >> 8) & 0xFF;
-var b2 = (length) => length < 65536 ? 0 : (length >> 16) & 0xFF;
-var b3 = (length) => length < 16777216 ? 0 : (length >> 24) & 0xFF;
+var b0 = (n) => n & 0xFF;
+var b1 = (n) => n < 256 ? 0 : (n >> 8) & 0xFF;
+var b2 = (n) => n < 65536 ? 0 : (n >> 16) & 0xFF;
+var b3 = (n) => n < 16777216 ? 0 : (n >> 24) & 0xFF;
