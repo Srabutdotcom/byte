@@ -1,3 +1,5 @@
+//@ts-self-types="../type/getuint.d.ts"
+
 /**
  * Get a 8-bit unsigned integer from big-endian bytes
  * @param {Uint8Array} bytes - At least 1 byte
