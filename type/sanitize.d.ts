@@ -8,6 +8,8 @@
  * @param {number} [option.startLength=0] - Byte offset where length header starts.
  * @param {number} [option.minLength=0] - Minimum number of bytes the input must contain.
  * @param {number} [option.maxLength=2**32 - 1] - Maximum number of bytes the length header can indicate.
+ * @param {number} [option.fixedLength = false] - if defined with number - represent Length of bytes with fixed length
+ * @param {number} [option.all = false] - if true represent all bytes will be taken
  * @param {boolean} [option.trace=false] - If `true`, logs internal tracing via `console.trace()`.
  * 
  * @throws {RangeError} If length is outside bounds, or input is too short.

@@ -10,7 +10,7 @@ export function getUint8(bytes, offset = 0) {
    if (bytes.length < offset + 1) {
       throw new RangeError('getUint8 requires at least 1 byte from the offset');
    }
-   return bytes[offset + 1];
+   return bytes[offset];
 }
 
 /**

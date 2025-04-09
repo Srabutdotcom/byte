@@ -10,7 +10,7 @@ const encoder = new TextEncoder
  * @param {[(number | Array | ArrayBuffer | Uint8Array | { view: Uint8Array })]} args - A single-element array with a data source. Only the first element is used.
  * @param {object} [option] - Optional configuration.
  * @param {number} [option.start=0] - Byte offset where the data starts.
- * @param {number} [option.startLength=undefined] - Byte offset where length header starts, undefined mean all data are extracted.
+ * @param {number} [option.startLength=0] - Byte offset where length header starts, undefined mean all data are extracted.
  * @param {number} [option.minLength=0] - Minimum number of bytes the input must contain.
  * @param {number} [option.maxLength=2**32 - 1] - Maximum number of bytes the length header can indicate.
  * @param {boolean} [option.trace=false] - If `true`, logs internal tracing via `console.trace()`.
@@ -20,12 +20,18 @@ const encoder = new TextEncoder
  * 
  * @returns {void}
  */
-export function sanitize(args, option = { start: 0, startLength: undefined, minLength: 0, maxLength: 2 ** 32 - 1, trace: false }) {
+export function sanitize(args, option = {
+   start: 0, startLength: 0, minLength: 0, maxLength: 2 ** 32 - 1,
+   fixedLength: false, all: false,
+   trace: false
+}) {
    const {
       start = 0,
-      startLength = undefined,
+      startLength = 0,
       minLength = 0,
       maxLength = 2 ** 32 - 1,
+      fixedLength = undefined,
+      all = false,
       trace = false
    } = option
 
@@ -53,12 +59,20 @@ export function sanitize(args, option = { start: 0, startLength: undefined, minL
    // for string
    if (typeof a0 == 'string') {
       a0 = encoder.encode(a0);
-      console.trace({ "arraying string": a0 })
+      if (trace) console.trace({ "arraying string": a0 })
+      args[0] = a0;
+      return
    }
 
-   if (startLength === undefined) {
+   if (all) {
       args[0] = a0.subarray(start);
-      console.trace({ "returning all": args[0] })
+      if (trace) console.trace({ "returning all": args[0] })
+      return
+   }
+
+   if (fixedLength && typeof fixedLength == "number") {
+      args[0] = a0.subarray(start, start + fixedLength);
+      if (trace) console.trace({ "returning fixedLength": args[0] })
       return
    }
 
