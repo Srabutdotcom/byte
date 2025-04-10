@@ -39,11 +39,6 @@ export function sanitize(args, option = {
 
    let a0 = args[0];
 
-   // for Byte custome object 
-   if (a0 instanceof Byte) {
-      a0 = a0.view;
-   }
-
    // for Array value
    if (Array.isArray(a0)) {
       a0 = new Uint8Array(a0);
@@ -102,7 +97,7 @@ export function sanitize(args, option = {
       throw new RangeError(`Input too short. Expected at least ${end}`);
    }
 
-   args[0] = a0.subarray(start, end);
+   args[0] = a0.subarray(0, end);
    if (trace) console.trace({ args: args[0] })
 }
 
