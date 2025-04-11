@@ -1,5 +1,4 @@
 //@ts-self-types="../type/sanitize.d.ts"
-import { Byte } from "./byte.js";
 
 const encoder = new TextEncoder
 

@@ -1,6 +1,13 @@
 //@ts-self-types="../type/vector.d.ts"
-import { arraying } from "./byte.js";
-import { unity } from "./unity.js";
+
+export function arraying(value) {
+   if (value instanceof Uint8Array || Array.isArray(value)) return value;
+   if (value instanceof Byte) return value.view;
+   if (typeof value === 'string') return encoder.encode(value);
+   if (value == null || value === false) return new Uint8Array();
+   if (isByte(value)) return new Uint8Array(value);
+   throw new TypeError('Value must be a Uint8Array, Array, or string.');
+}
 
 export function vector(array, option = { min: 0, max: 255 }) {
    array = arraying(array);
@@ -19,26 +26,46 @@ export function vector(array, option = { min: 0, max: 255 }) {
    }
 }
 
-function vector8(array) {
-   return unity(array.length, array)
+export function vector8(array) {
+   const n = array.length
+   const res = new Uint8Array(n + 1);
+   res.set(array, 1);
+   res[1] = n & 0xFF;
+   return res
 }
 
-function vector16(array) {
-   const length = array.length;
-   return unity(b1(length), b0(length), array);
+export function vector16(array) {
+   const n = array.length
+   const res = new Uint8Array(n + 2);
+   res.set(array, 2);
+   res[1] = n & 0xFF;
+   if (n < 256) return res;
+   res[0] = (n >> 8) & 0xFF;
+   return res
 }
 
-function vector24(array) {
-   const length = array.length;
-   return unity(b2(length), b1(length), b0(length), array);
+export function vector24(array) {
+   const n = array.length
+   const res = new Uint8Array(n + 3);
+   res.set(array, 3);
+   res[2] = n & 0xFF;
+   if (n < 256) return res;
+   res[1] = (n >> 8) & 0xFF;
+   if (n < 65536) return res;
+   res[0] = (n >> 16) & 0xFF;
+   return res
 }
 
-function vector32(array) {
-   const length = array.length;
-   return unity(b3(length), b2(length), b1(length), b0(length), array);
+export function vector32(array) {
+   const n = array.length
+   const res = new Uint8Array(n + 4);
+   res.set(array, 4);
+   res[3] = n & 0xFF;
+   if (n < 256) return res;
+   res[2] = (n >> 8) & 0xFF;
+   if (n < 65536) return res;
+   res[1] = (n >> 16) & 0xFF;
+   if (n < 16777216) return res;
+   res[0] = (n >> 24) & 0xFF;
+   return res
 }
-
-var b0 = (n) => n & 0xFF;
-var b1 = (n) => n < 256 ? 0 : (n >> 8) & 0xFF;
-var b2 = (n) => n < 65536 ? 0 : (n >> 16) & 0xFF;
-var b3 = (n) => n < 16777216 ? 0 : (n >> 24) & 0xFF;
