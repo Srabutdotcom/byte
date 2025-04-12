@@ -30,7 +30,7 @@ export function vector8(array) {
    const n = array.length
    const res = new Uint8Array(n + 1);
    res.set(array, 1);
-   res[1] = n & 0xFF;
+   res[0] = n & 0xFF;
    return res
 }
 
