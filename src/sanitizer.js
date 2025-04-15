@@ -92,10 +92,6 @@ export function sanitize(args, option = {
 
    const end = start + lengthBytes + lengthOf;
 
-   if (a0.length < end) {
-      throw new RangeError(`Input too short. Expected at least ${end}`);
-   }
-
    args[0] = a0.subarray(0, end);
    if (trace) console.trace({ args: args[0] })
 }
