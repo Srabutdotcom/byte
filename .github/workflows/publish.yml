@@ -9,6 +9,7 @@ on:
 
 jobs:
   inject-and-publish:
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,6 +23,12 @@ jobs:
         # uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31  # v1.1.2
         with:
           deno-version: v2.x
+      
+      - name: Run linter
+        run: deno lint src/ --rules-exclude=no-var, no-explicit-any
+  
+      - name: Run tests
+        run: deno test test/*.js
 
       - name: Run Inject Version
         run: deno run --allow-read --allow-write type/version.js
