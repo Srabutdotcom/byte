@@ -1,6 +1,7 @@
 
 /**
  * Represents a byte array with utility methods for conversion.
+ * @version __VERSION__
  */
 export declare class Byte extends Uint8Array {
   /**

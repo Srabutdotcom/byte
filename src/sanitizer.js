@@ -57,12 +57,17 @@ export function sanitize(args, option = {
    }
 
    if (all) {
+      if(!a0) return
       args[0] = a0.subarray(start);
       if (trace) console.trace({ "returning all": args[0] })
       return
    }
 
    if (fixedLength && typeof fixedLength == "number") {
+      if(!a0){
+         args[0] = fixedLength;
+         return;
+      }
       args[0] = a0.subarray(start, start + fixedLength);
       if (trace) console.trace({ "returning fixedLength": args[0] })
       return

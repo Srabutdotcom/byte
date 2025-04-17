@@ -1,4 +1,5 @@
 import { sanitize } from "../src/sanitizer.js";
+import { Uint32 } from "../src/uintarray.js"
 import { assertThrows } from "@std/assert";
 
 const data_1 = Uint8Array.of(0, 14, 0, 12, 0, 0, 9, 108, 111, 99, 97, 108, 104, 111, 115, 116)
@@ -15,5 +16,7 @@ const sanitize_2 = sanitize([data_2], { start: 0, min: 4, max: 2 ** 16 - 1, trac
 const sanitize_3 = sanitize(["hello"], { start: 0, all: true, trace: true })
 
 const sanitize_4 = sanitize([[0, 2]], { start: 0, fixedLength: 2 , trace: true});
+
+const sanitize_5 = new Uint32
 
 const _null = null;
