@@ -4,7 +4,7 @@
  * @param {number} offset - The starting offset within the Uint8Array.
  * @returns {number} - The 8-bit value.
  * @throws {RangeError} - If the offset is out of bounds.
- * @version 0.8.1
+ * @version 0.8.2
  */
 export declare function getUint8(bytes: Uint8Array, offset: number): number;
 

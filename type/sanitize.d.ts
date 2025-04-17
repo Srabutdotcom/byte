@@ -16,7 +16,7 @@
  * @throws {TypeError} If input is not a recognized byte-like object.
  * 
  * @returns {void}
- * @version 0.8.1
+ * @version 0.8.2
  */
 export function sanitize(
    args: [number | Array<number> | ArrayBuffer | Uint8Array | { view: Uint8Array }],
