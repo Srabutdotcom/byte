@@ -1,18 +1,28 @@
 {
   "name": "@aicone/byte",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "exports": "./src/mod.ts",
-  "publish":{
-    "exclude": ["dist/tsconfig.json", "dist/"]
+  "publish": {
+    "exclude": [
+      "dist/tsconfig.json",
+      "dist/"
+    ]
   },
-  "tasks":{
+  "tasks": {
     "test": "deno test --allow-read",
     "lint": "deno lint"
   },
-  "lint":{
-    "include": ["src/", "type/"],
+  "lint": {
+    "include": [
+      "src/",
+      "type/"
+    ],
     "rules": {
-      "exclude": ["no-var", "no-explicit-any", "no-slow-types"]
+      "exclude": [
+        "no-var",
+        "no-explicit-any",
+        "no-slow-types"
+      ]
     }
   },
   "imports": {
