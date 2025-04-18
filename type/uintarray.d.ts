@@ -3,7 +3,7 @@
  * @param {number} value - The 8-bit unsigned integer.
  * @returns {Uint8Array} - The Uint8Array containing the 8-bit value.
  * @throws {RangeError} - If the value is not a positive integer between 0 and 255.
- * @version 0.8.5
+ * @version 0.8.6
  */
 export declare function uint8(value: number): Uint8Array;
 
@@ -12,7 +12,7 @@ export declare function uint8(value: number): Uint8Array;
  * @param {number} value - The 16-bit unsigned integer.
  * @returns {Uint8Array} - The Uint8Array containing the 16-bit value (big-endian).
  * @throws {RangeError} - If the value is not a positive integer between 0 and 65535.
- * @version 0.8.5
+ * @version 0.8.6
  */
 export declare function uint16(value: number): Uint8Array;
 
@@ -21,7 +21,7 @@ export declare function uint16(value: number): Uint8Array;
  * @param {number} value - The 24-bit unsigned integer.
  * @returns {Uint8Array} - The Uint8Array containing the 24-bit value (big-endian).
  * @throws {RangeError} - If the value is not a positive integer between 0 and 16777215.
- * @version 0.8.5
+ * @version 0.8.6
  */
 export declare function uint24(value: number): Uint8Array;
 
@@ -30,13 +30,13 @@ export declare function uint24(value: number): Uint8Array;
  * @param {number} value - The 32-bit unsigned integer.
  * @returns {Uint8Array} - The Uint8Array containing the 32-bit value (big-endian).
  * @throws {RangeError} - If the value is not a positive integer between 0 and 4294967295.
- * @version 0.8.5
+ * @version 0.8.6
  */
 export declare function uint32(value: number): Uint8Array;
 
 /**
  * Represents an 8-bit unsigned integer as a Uint8Array.
- * @version 0.8.5
+ * @version 0.8.6
  */
 export declare class Uint8 extends Uint8Array {
   /**
@@ -71,7 +71,7 @@ export declare class Uint8 extends Uint8Array {
 
 /**
  * Represents a 16-bit unsigned integer as a Uint8Array.
- * @version 0.8.5
+ * @version 0.8.6
  */
 export declare class Uint16 extends Uint8Array {
   /**
@@ -106,7 +106,7 @@ export declare class Uint16 extends Uint8Array {
 
 /**
  * Represents a 24-bit unsigned integer as a Uint8Array.
- * @version 0.8.5
+ * @version 0.8.6
  */
 export declare class Uint24 extends Uint8Array {
   /**
@@ -141,7 +141,7 @@ export declare class Uint24 extends Uint8Array {
 
 /**
  * Represents a 32-bit unsigned integer as a Uint8Array.
- * @version 0.8.5
+ * @version 0.8.6
  */
 export declare class Uint32 extends Uint8Array {
   /**
