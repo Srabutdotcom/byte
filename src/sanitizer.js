@@ -1,11 +1,6 @@
 //@ts-self-types="../type/sanitize.d.ts"
 
 const encoder = new TextEncoder
-const defaultOption = {
-   start: 0, min: 0, max: 2 ** 32 - 1,
-   fixedLength: false, all: false,
-   trace: false
-}
 
 /**
  * Sanitizes and modifies `args[0]` in-place by slicing it based on length metadata encoded in the input.
@@ -23,15 +18,14 @@ const defaultOption = {
  * 
  * @returns {void}
  */
-export function sanitize(args, option = defaultOption) {
-   const {
-      start = 0,
-      min = 0,
-      max = 2 ** 32 - 1,
-      fixedLength = undefined,
-      all = false,
-      trace = false
-   } = {...defaultOption, ...option}
+export function sanitize(args, {
+   start = 0,
+   min = 0,
+   max = 2 ** 32 - 1,
+   fixedLength = undefined,
+   all = false,
+   trace = false
+} = {}) {
 
    if (max > 2 ** 32 - 1) throw new RangeError(`max should be less than 2**32-1`)
 
@@ -58,14 +52,14 @@ export function sanitize(args, option = defaultOption) {
    }
 
    if (all) {
-      if(!a0) return
+      if (!a0) return
       args[0] = a0.subarray(start);
       if (trace) console.trace({ "returning all": args[0] })
       return
    }
 
    if (fixedLength && typeof fixedLength == "number") {
-      if(!a0){
+      if (!a0) {
          args[0] = fixedLength;
          return;
       }

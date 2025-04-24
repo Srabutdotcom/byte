@@ -1,7 +1,7 @@
 # @aicone/byte
 
 # Byte
-@version 0.8.7
+@version 0.8.8
 A lightweight utility class that extends `Uint8Array` to simplify encoding and decoding between various formats including hexadecimal, base64, base64url, and UTF-8 strings.
 
 ## Features
