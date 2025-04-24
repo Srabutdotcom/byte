@@ -2,7 +2,6 @@
 
 export function arraying(value) {
    if (value instanceof Uint8Array || Array.isArray(value)) return value;
-   if (value instanceof Byte) return value.view;
    if (typeof value === 'string') return encoder.encode(value);
    if (value == null || value === false) return new Uint8Array();
    if (isByte(value)) return new Uint8Array(value);
