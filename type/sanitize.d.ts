@@ -10,7 +10,7 @@ export type ByteLike =
   | string;
 
 /**
- * @version 0.8.9
+ * @version 0.8.10
  * Sanitizes and modifies `args[0]` in-place by slicing it based on length metadata encoded in the input.
  * Supports Uint8Array, ArrayBuffer, Array, or Byte (custom class with `.view` as Uint8Array).
  *

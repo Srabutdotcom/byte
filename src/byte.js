@@ -31,6 +31,8 @@ export class Byte extends Uint8Array {
       return new Byte(Convert.FromString(string))
    }
 
+   static from(a){ return new Byte(a)}
+
    constructor(...args) {
       super(...args)
       if (args[0] instanceof Uint8Array || args[0] instanceof ArrayBuffer) this.init();

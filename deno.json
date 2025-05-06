@@ -1,6 +1,6 @@
 {
   "name": "@aicone/byte",
-  "version": "0.8.9",
+  "version": "0.8.10",
   "exports": "./src/mod.ts",
   "publish": {
     "exclude": [

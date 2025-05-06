@@ -12,4 +12,7 @@ console.log("toBigInt ", bigint)
 const ca1 = Byte.create([0x30, 0x82, 0x01, 0x0a]); // Example DN
 //const ca2 = Byte.create([0x30, 0x81, 0xfa]);       // Another example DN
 const ca2 = Byte.create();
+
+const test_0 = Byte.from(test);
+const bigint_0 = await test_0.bigInt();
 const _null = null;
