@@ -1,6 +1,13 @@
 //@ts-self-types="../type/byte.d.ts"
 import { Convert } from "pvtsutils"
 
+const base64 = Symbol('base64');
+const base64url = Symbol('base64url');
+const hex = Symbol('hex');
+const utf8string = Symbol('utf8string')
+const bigint = Symbol('bigint')
+const decoder = new TextDecoder
+
 export class Byte extends Uint8Array {
    static create(array) {
       return new Byte(array)
@@ -24,6 +31,29 @@ export class Byte extends Uint8Array {
       return new Byte(Convert.FromString(string))
    }
 
+   constructor(...args) {
+      super(...args)
+      if (args[0] instanceof Uint8Array || args[0] instanceof ArrayBuffer) this.init();
+   }
+
+   init() {
+      this[base64] = new Promise(r => {
+         r(this.toBase64())
+      })
+      this[base64url] = new Promise(r => {
+         r(this.toBase64Url())
+      })
+      this[hex] = new Promise(r => {
+         r(this.toHex())
+      })
+      this[utf8string] = new Promise(r => {
+         r(this.toUtf8String())
+      })
+      this[bigint] = new Promise(r => {
+         r(this.toBigInt())
+      })
+   }
+
    toBase64() {
       return Convert.ToBase64(this)
    }
@@ -37,6 +67,44 @@ export class Byte extends Uint8Array {
    }
 
    toUtf8String() {
-      return Convert.ToUtf8String(this)
+      return decoder.decode(this)
    }
+
+   toBigInt() {
+      return bigIntFrom(this)
+   }
+
+   async bigInt(){
+      return await this[bigint]
+   }
+
+   async base64(){
+      return await this[base64]
+   }
+
+   async base64url() {
+      return await this[base64url];
+   }
+   
+   async hex() {
+      return await this[hex];
+   }
+   
+   async utf8string() {
+      return await this[utf8string];
+   }
+}
+
+
+function bigIntFrom(bytes) {
+   // Create a Uint8Array from the byte array
+   const uint8Array = new Uint8Array(bytes);
+
+   // Convert the Uint8Array to BigInt by joining the bytes in base 256
+   let bigIntValue = BigInt(0);
+   for (let i = 0; i < uint8Array.length; i++) {
+      bigIntValue = (bigIntValue << BigInt(8)) + BigInt(uint8Array[i]);
+   }
+
+   return bigIntValue;
 }
